@@ -31,6 +31,7 @@ re-planning, and a second milling machine.
 | **result** | **makespan 4** -> `schedule_2x2.json` | **makespan 8** -> `schedule_3x3.json` |
 | cross-checks | ground states certified over all 2^12 states; Qiskit circuit agrees to 1e-16 | ground states certified; 24-qubit domain-wall QUBO certified over all 2^24 states; SA, tabu and **VeloxQ** on the 72-, 39-, 33-, 24-qubit QUBOs and the 3-qubit job-order code (VeloxQ optimal reads 13% / 93% / 99% / 94% / 100%, makespan 8 in every call) |
 | fewest qubits (job-order code, comparison only) | **1 qubit** | **3 qubits**, certified over all 2^3 states; coefficients come from brute force over the 6 job orders |
+| our own 24-variable QUBO on 4 qubits (Pauli correlation encoding, Part 7) | - | **4 qubits**: optimal schedule in 19% of variational restarts (44% after one bit-swap pass); heuristic, see below |
 
 **Fewest qubits for the baseline 3x3: 3**, with the job-order code (`erpq/permutation.py`). Three bits
 number the 3! = 6 job orders, and the energy of each code is the makespan of that order:
@@ -45,6 +46,19 @@ order; start times are decoded classically. It is therefore reported for compari
 singleton arc consistency -> 24 domain-wall encoding). Every step is exact and polynomial to construct,
 and the 24-qubit QUBO is certified correct by enumerating all 2^24 states. Minimality is not claimed.
 This is the model behind the schedules and Stage 2.
+
+**The same 24-variable QUBO on 4 qubits** (Part 7, [`pce.md`](results/extension/pce.md)). With Pauli
+correlation encoding (PCE; Sciorilli et al., arXiv:2401.09421) the 24 binary variables are the signs of
+24 Pauli correlators (weight 1 and 2, families Z..Z / X..X / Y..Y) of a single 4-qubit state. The
+circuit needs 4 qubits and 3 measurement settings, and no coefficient comes from brute force. A
+40-angle hardware-efficient circuit, trained on the paper's relaxed loss (alpha = 4, beta = 1/2),
+reaches an optimal schedule (makespan 8) in 19 of 100 random restarts (uniform: 7.7e-7 per bit string;
+22 restarts give 99%), and in 44 after the paper's one-pass bit-swap post-processing. The Qiskit circuit
+agrees to 5e-16, and 4096 shots per setting reproduce the read-out. The limits:
+* PCE is a variational heuristic without a certificate; certification stays with the 24-variable QUBO.
+* The same relaxed loss without any quantum state (24 free parameters) also reaches 19%.
+* SA on the 24 qubits reaches 95% per read.
+* The smallest correlator margin is only 1.8 shot-noise standard deviations at 4096 shots.
 
 ### Stage 2 - extension
 
@@ -105,6 +119,7 @@ python run_extension.py all             # all five experiments (~30 minutes on 4
 python run_extension.py all --quick     # reduced statistics (~10 minutes)
 python run_extension.py reduction       # or a single part: reduction | algorithms | scaling | disruption | investment
 python run_extension.py veloxq          # Part 6, VeloxQ at scale (needs VELOX_TOKEN, see VeloxQ below)
+python run_extension.py pce             # Part 7, instance B on 4 qubits (Pauli correlation encoding, ~1.5 minutes)
 python run_extension.py all --quick --out /tmp/ext   # write elsewhere; results/extension/ stays untouched
 python run_extension.py replot          # rebuild charts and markdown from the saved JSON (~30 seconds)
 ```
@@ -126,7 +141,7 @@ python demo.py --veloxq   # adds step 5: the breakdown re-planned live on VeloxQ
 python -m pytest -q
 ```
 
-The tests (46) check:
+The tests (49) check:
 * the validator and the raw schedule files;
 * that sampler results are mapped back by label, also from SPIN answers (how VeloxQ returns them);
 * the reference sizes (72 / 39 / 33 / 24);
@@ -139,7 +154,9 @@ The tests (46) check:
 * the domain-wall equivalence, the adjoint gradients and the Qiskit cross-checks;
 * horizon ascent and rolling re-planning;
 * the decomposition: a sub-QUBO's objective is the full objective up to a constant, the block-diagonal
-  batch QUBO is the sum of its blocks, and the search never leaves feasibility or gets worse.
+  batch QUBO is the sum of its blocks, and the search never leaves feasibility or gets worse;
+* Pauli correlation encoding: the correlators against dense Pauli matrices, the parameter-shift
+  gradients against finite differences, and an optimal schedule of instance B from 4 qubits.
 
 ### VeloxQ
 
@@ -292,7 +309,8 @@ erpq/                 the package (see PROJECT_DESIGN.md Sec. 8 for a per-file d
   decompose.py        decomposition of large order books into small exact sub-QUBOs (batched for VeloxQ)
   classical.py        CP-SAT reference
   heuristics.py       bounds, FIFO / NEH / EDD heuristics, brute force
-  solvers/            QAOA simulators (X and XY mixers), Qiskit cross-check, SA / tabu / VeloxQ
+  solvers/            QAOA simulators (X and XY mixers), Qiskit cross-check, SA / tabu / VeloxQ,
+                      Pauli correlation encoding (24 variables on 4 qubits)
 instances/            instance_2x2.json, instance_3x3.json, extension/*.json
 run_baseline.py       Stage 1 pipeline
 run_extension.py      Stage 2 experiments

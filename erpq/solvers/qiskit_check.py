@@ -66,6 +66,33 @@ def compare_x_qaoa(qubo: QUBO, gammas, betas, scale: float, probs_numpy: np.ndar
     return float(np.max(np.abs(p - probs_numpy)))
 
 
+def pce_circuit(pce, theta):
+    from qiskit import QuantumCircuit
+
+    n = pce.n
+    th = np.asarray(theta).reshape(pce.layers + 1, n, 2)
+    qc = QuantumCircuit(n)
+    for layer in range(pce.layers + 1):
+        if layer:
+            for a in range(n):
+                qc.cx(a, (a + 1) % n)
+        for k in range(n):
+            qc.ry(th[layer, k, 0], k)
+            qc.rz(th[layer, k, 1], k)
+    return qc
+
+
+def compare_pce(pce, theta) -> float:
+    """Max |<Pi_i>_numpy - <Pi_i>_qiskit| over all encoded variables, gate-level circuit."""
+    from qiskit.quantum_info import SparsePauliOp, Statevector
+
+    from .pce import qiskit_label
+
+    sv = Statevector.from_instruction(pce_circuit(pce, theta))
+    ref = np.array([sv.expectation_value(SparsePauliOp(qiskit_label(pce.n, s))).real for s in pce.strings])
+    return float(np.max(np.abs(ref - pce.correlators(theta)[0])))
+
+
 def compare_xy_qaoa(form, gammas, betas, scale: float, probs_subspace: np.ndarray) -> float:
     p_full = statevector_probabilities(xy_qaoa_circuit(form, gammas, betas, scale))
     dims = [r.dim for r in form.registers]

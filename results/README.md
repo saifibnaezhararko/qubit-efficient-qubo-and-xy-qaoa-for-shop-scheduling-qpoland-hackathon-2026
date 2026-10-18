@@ -14,6 +14,7 @@ come from a cloud service that takes no seed, so they vary slightly between runs
 | `extension/disruption.md` | `run_extension.py disruption --veloxq` | 36 breakdown scenarios: right-shift vs QUBO re-plan (SA, XY-QAOA, live VeloxQ) vs CP-SAT |
 | `extension/investment.md` | `run_extension.py investment` | one vs two milling machines on 40 order books |
 | `extension/veloxq.md` (+ `.json`, `.png`) | `run_extension.py veloxq` (needs `VELOX_TOKEN`) | VeloxQ at scale: one call on the whole QUBO of 4-12-job order books (77-726 qubits), solver settings, decomposition with 8 sub-QUBOs per VeloxQ call vs SA |
+| `extension/pce.md` (+ `.json`) | `run_extension.py pce` | Part 7: instance B's certified 24-variable QUBO on 4 qubits with Pauli correlation encoding, vs the same loss without a quantum state and SA |
 | `extension/gantt_*.png`, `schedule_*.json`, `residual_*.json` | `run_extension.py` | example schedules and instances |
 
 The two mandatory schedule files are in the repository root: `schedule_2x2.json`, `schedule_3x3.json`.

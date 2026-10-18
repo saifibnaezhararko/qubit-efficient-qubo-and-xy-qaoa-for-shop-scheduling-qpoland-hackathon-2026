@@ -1,0 +1,191 @@
+{
+  "instance": "instance_3x3",
+  "horizon": 8,
+  "optimum": 8.0,
+  "formulation": "SAC + domain wall",
+  "variables": 24,
+  "couplings": 87,
+  "qubits": 4,
+  "measurement_settings": 3,
+  "strings": [
+    "IIZZ",
+    "IZIZ",
+    "ZIIZ",
+    "IZZI",
+    "ZIZI",
+    "ZZII",
+    "IIXX",
+    "IXIX",
+    "XIIX",
+    "IXXI",
+    "XIXI",
+    "XXII",
+    "IIYY",
+    "IYIY",
+    "YIIY",
+    "IYYI",
+    "YIYI",
+    "YYII",
+    "IIIZ",
+    "IIZI",
+    "IZII",
+    "ZIII",
+    "IIIX",
+    "IIXI"
+  ],
+  "optimal_bitstrings": 13,
+  "uniform_p_optimal": 7.748603820800781e-07,
+  "settings": {
+    "n_qubits": 4,
+    "variables": 24,
+    "layers": 4,
+    "parameters": 40,
+    "alpha": 4.0,
+    "beta": 0.5,
+    "nu": 45.125,
+    "restarts": 100,
+    "seed": 7,
+    "loss_evaluations": 23496
+  },
+  "wall_time_s": 90.17745569999897,
+  "rows": {
+    "pce_raw": {
+      "p_optimal": 0.19,
+      "p_feasible": 0.19,
+      "best": 8.0,
+      "reads": 100
+    },
+    "pce_bitswap": {
+      "p_optimal": 0.44,
+      "p_feasible": 0.44,
+      "best": 8.0,
+      "reads": 100
+    },
+    "relaxation_control": {
+      "p_optimal": 0.19,
+      "p_feasible": 0.19,
+      "best": 8.0,
+      "reads": 100
+    },
+    "sa": {
+      "p_optimal": 0.95,
+      "p_feasible": 0.95,
+      "best": 8.0,
+      "reads": 100
+    }
+  },
+  "restarts_for_99pct": 22,
+  "best_restart": {
+    "restart": 65,
+    "loss": 13.76421879791701,
+    "min_abs_correlator": 0.027882719954236246,
+    "qiskit_max_abs_diff": 4.996003610813204e-16,
+    "shots_per_setting": 4096,
+    "shot_readout_equal": true,
+    "shot_readout_makespan": 8,
+    "theta": [
+      3.866586240708366,
+      2.2226218599110195,
+      2.96861164134797,
+      6.269704829440934,
+      5.14611225697496,
+      5.077884614858883,
+      4.447595752671636,
+      5.051181148857163,
+      0.37377080641424754,
+      2.29950566554129,
+      5.032152102444408,
+      4.2730777221717755,
+      5.734186772695227,
+      0.8595631688212525,
+      0.35359493377599155,
+      5.670416497817824,
+      2.8335884385661454,
+      2.1089147140986095,
+      6.2313768064214905,
+      2.326779393475109,
+      6.2957715220200745,
+      3.0551358385193654,
+      1.0926070827623198,
+      0.3203551915540234,
+      3.727716291550887,
+      2.3623360877145503,
+      5.64521803656239,
+      1.2378656538738984,
+      0.2506239480125334,
+      0.4649730648950156,
+      4.600369416362321,
+      4.421973258331416,
+      2.824573348273254,
+      3.4415889548383833,
+      3.7209152648213943,
+      0.7046302991693044,
+      1.7071285424414258,
+      6.296372103679989,
+      3.0173876131566866,
+      6.498977387865464
+    ],
+    "schedule": {
+      "instance": "instance_3x3",
+      "method": "",
+      "makespan": 8,
+      "schedule": [
+        {
+          "job": "Z1",
+          "machine": "T",
+          "start": 0,
+          "end": 2
+        },
+        {
+          "job": "Z1",
+          "machine": "F",
+          "start": 2,
+          "end": 3
+        },
+        {
+          "job": "Z2",
+          "machine": "T",
+          "start": 2,
+          "end": 3
+        },
+        {
+          "job": "Z2",
+          "machine": "F",
+          "start": 3,
+          "end": 5
+        },
+        {
+          "job": "Z3",
+          "machine": "T",
+          "start": 3,
+          "end": 5
+        },
+        {
+          "job": "Z1",
+          "machine": "S",
+          "start": 4,
+          "end": 6
+        },
+        {
+          "job": "Z3",
+          "machine": "F",
+          "start": 5,
+          "end": 7
+        },
+        {
+          "job": "Z2",
+          "machine": "S",
+          "start": 6,
+          "end": 7
+        },
+        {
+          "job": "Z3",
+          "machine": "S",
+          "start": 7,
+          "end": 8
+        }
+      ]
+    },
+    "ascii_gantt": "      01234567\n    T 11233...\n    F ..12233.\n    S ....1123"
+  }
+}
