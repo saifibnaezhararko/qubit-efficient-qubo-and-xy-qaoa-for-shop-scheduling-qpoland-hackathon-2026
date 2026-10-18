@@ -1,0 +1,946 @@
+{
+  "summary": {
+    "order_books": 40,
+    "mean_saving_cost_units": 10.5,
+    "ci95": [
+      9.0,
+      12.125
+    ],
+    "mean_saving_from_qubo_solutions": 10.5,
+    "ci95_qubo": [
+      9.0,
+      12.125
+    ],
+    "mean_relative_gap_qubo": 0.0,
+    "cost_unit_pln": 150.0,
+    "daily_saving_pln": 1575.0,
+    "annual_saving_pln": 393750.0,
+    "machine_cost_pln": 450000,
+    "payback_years": 1.1428571428571428,
+    "qubo_matches_optimum_share": 1.0,
+    "mean_qubits_1F": 116.35,
+    "mean_qubits_2F": 161.7
+  },
+  "books": [
+    {
+      "book": 0,
+      "1F": {
+        "H": 14,
+        "qubits": 121,
+        "qubits_dw": 109,
+        "optimum": 34.0,
+        "qubo_best": 34.0,
+        "makespan": 14,
+        "tardiness": 6.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 166,
+        "qubits_dw": 154,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 10,
+        "tardiness": 2.0
+      },
+      "saving": 12.0,
+      "saving_qubo": 12.0
+    },
+    {
+      "book": 1,
+      "1F": {
+        "H": 15,
+        "qubits": 126,
+        "qubits_dw": 114,
+        "optimum": 30.0,
+        "qubo_best": 30.0,
+        "makespan": 14,
+        "tardiness": 2.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 169,
+        "qubits_dw": 157,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 12,
+        "tardiness": 0.0
+      },
+      "saving": 6.0,
+      "saving_qubo": 6.0
+    },
+    {
+      "book": 2,
+      "1F": {
+        "H": 17,
+        "qubits": 140,
+        "qubits_dw": 128,
+        "optimum": 51.0,
+        "qubo_best": 51.0,
+        "makespan": 16,
+        "tardiness": 19.0
+      },
+      "2F": {
+        "H": 17,
+        "qubits": 189,
+        "qubits_dw": 177,
+        "optimum": 32.0,
+        "qubo_best": 32.0,
+        "makespan": 13,
+        "tardiness": 6.0
+      },
+      "saving": 19.0,
+      "saving_qubo": 19.0
+    },
+    {
+      "book": 3,
+      "1F": {
+        "H": 14,
+        "qubits": 108,
+        "qubits_dw": 96,
+        "optimum": 29.0,
+        "qubo_best": 29.0,
+        "makespan": 13,
+        "tardiness": 3.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 156,
+        "qubits_dw": 144,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 11,
+        "tardiness": 0.0
+      },
+      "saving": 7.0,
+      "saving_qubo": 7.0
+    },
+    {
+      "book": 4,
+      "1F": {
+        "H": 13,
+        "qubits": 113,
+        "qubits_dw": 101,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 12,
+        "tardiness": 0.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 152,
+        "qubits_dw": 140,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 4.0,
+      "saving_qubo": 4.0
+    },
+    {
+      "book": 5,
+      "1F": {
+        "H": 14,
+        "qubits": 104,
+        "qubits_dw": 92,
+        "optimum": 26.0,
+        "qubo_best": 26.0,
+        "makespan": 13,
+        "tardiness": 0.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 152,
+        "qubits_dw": 140,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 11,
+        "tardiness": 0.0
+      },
+      "saving": 4.0,
+      "saving_qubo": 4.0
+    },
+    {
+      "book": 6,
+      "1F": {
+        "H": 14,
+        "qubits": 115,
+        "qubits_dw": 103,
+        "optimum": 34.0,
+        "qubo_best": 34.0,
+        "makespan": 14,
+        "tardiness": 6.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 156,
+        "qubits_dw": 144,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 11,
+        "tardiness": 2.0
+      },
+      "saving": 10.0,
+      "saving_qubo": 10.0
+    },
+    {
+      "book": 7,
+      "1F": {
+        "H": 16,
+        "qubits": 131,
+        "qubits_dw": 119,
+        "optimum": 37.0,
+        "qubo_best": 37.0,
+        "makespan": 15,
+        "tardiness": 7.0
+      },
+      "2F": {
+        "H": 16,
+        "qubits": 182,
+        "qubits_dw": 170,
+        "optimum": 25.0,
+        "qubo_best": 25.0,
+        "makespan": 12,
+        "tardiness": 1.0
+      },
+      "saving": 12.0,
+      "saving_qubo": 12.0
+    },
+    {
+      "book": 8,
+      "1F": {
+        "H": 13,
+        "qubits": 48,
+        "qubits_dw": 36,
+        "optimum": 37.0,
+        "qubo_best": 37.0,
+        "makespan": 13,
+        "tardiness": 11.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 135,
+        "qubits_dw": 123,
+        "optimum": 30.0,
+        "qubo_best": 30.0,
+        "makespan": 13,
+        "tardiness": 4.0
+      },
+      "saving": 7.0,
+      "saving_qubo": 7.0
+    },
+    {
+      "book": 9,
+      "1F": {
+        "H": 15,
+        "qubits": 127,
+        "qubits_dw": 115,
+        "optimum": 39.0,
+        "qubo_best": 39.0,
+        "makespan": 15,
+        "tardiness": 9.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 174,
+        "qubits_dw": 162,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 19.0,
+      "saving_qubo": 19.0
+    },
+    {
+      "book": 10,
+      "1F": {
+        "H": 15,
+        "qubits": 121,
+        "qubits_dw": 109,
+        "optimum": 36.0,
+        "qubo_best": 36.0,
+        "makespan": 14,
+        "tardiness": 8.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 174,
+        "qubits_dw": 162,
+        "optimum": 23.0,
+        "qubo_best": 23.0,
+        "makespan": 11,
+        "tardiness": 1.0
+      },
+      "saving": 13.0,
+      "saving_qubo": 13.0
+    },
+    {
+      "book": 11,
+      "1F": {
+        "H": 14,
+        "qubits": 119,
+        "qubits_dw": 107,
+        "optimum": 37.0,
+        "qubo_best": 37.0,
+        "makespan": 13,
+        "tardiness": 11.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 160,
+        "qubits_dw": 148,
+        "optimum": 31.0,
+        "qubo_best": 31.0,
+        "makespan": 11,
+        "tardiness": 9.0
+      },
+      "saving": 6.0,
+      "saving_qubo": 6.0
+    },
+    {
+      "book": 12,
+      "1F": {
+        "H": 15,
+        "qubits": 126,
+        "qubits_dw": 114,
+        "optimum": 41.0,
+        "qubo_best": 41.0,
+        "makespan": 14,
+        "tardiness": 13.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 169,
+        "qubits_dw": 157,
+        "optimum": 29.0,
+        "qubo_best": 29.0,
+        "makespan": 12,
+        "tardiness": 5.0
+      },
+      "saving": 12.0,
+      "saving_qubo": 12.0
+    },
+    {
+      "book": 13,
+      "1F": {
+        "H": 14,
+        "qubits": 114,
+        "qubits_dw": 102,
+        "optimum": 28.0,
+        "qubo_best": 28.0,
+        "makespan": 13,
+        "tardiness": 2.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 161,
+        "qubits_dw": 149,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 8.0,
+      "saving_qubo": 8.0
+    },
+    {
+      "book": 14,
+      "1F": {
+        "H": 14,
+        "qubits": 116,
+        "qubits_dw": 104,
+        "optimum": 29.0,
+        "qubo_best": 29.0,
+        "makespan": 13,
+        "tardiness": 3.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 155,
+        "qubits_dw": 143,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 12,
+        "tardiness": 0.0
+      },
+      "saving": 5.0,
+      "saving_qubo": 5.0
+    },
+    {
+      "book": 15,
+      "1F": {
+        "H": 15,
+        "qubits": 129,
+        "qubits_dw": 117,
+        "optimum": 39.0,
+        "qubo_best": 39.0,
+        "makespan": 14,
+        "tardiness": 11.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 174,
+        "qubits_dw": 162,
+        "optimum": 27.0,
+        "qubo_best": 27.0,
+        "makespan": 12,
+        "tardiness": 3.0
+      },
+      "saving": 12.0,
+      "saving_qubo": 12.0
+    },
+    {
+      "book": 16,
+      "1F": {
+        "H": 17,
+        "qubits": 147,
+        "qubits_dw": 135,
+        "optimum": 39.0,
+        "qubo_best": 39.0,
+        "makespan": 16,
+        "tardiness": 7.0
+      },
+      "2F": {
+        "H": 17,
+        "qubits": 199,
+        "qubits_dw": 187,
+        "optimum": 26.0,
+        "qubo_best": 26.0,
+        "makespan": 12,
+        "tardiness": 2.0
+      },
+      "saving": 13.0,
+      "saving_qubo": 13.0
+    },
+    {
+      "book": 17,
+      "1F": {
+        "H": 15,
+        "qubits": 125,
+        "qubits_dw": 113,
+        "optimum": 34.0,
+        "qubo_best": 34.0,
+        "makespan": 14,
+        "tardiness": 6.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 168,
+        "qubits_dw": 156,
+        "optimum": 25.0,
+        "qubo_best": 25.0,
+        "makespan": 11,
+        "tardiness": 3.0
+      },
+      "saving": 9.0,
+      "saving_qubo": 9.0
+    },
+    {
+      "book": 18,
+      "1F": {
+        "H": 12,
+        "qubits": 101,
+        "qubits_dw": 89,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 12,
+        "tardiness": 0.0
+      },
+      "2F": {
+        "H": 12,
+        "qubits": 135,
+        "qubits_dw": 123,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 11,
+        "tardiness": 0.0
+      },
+      "saving": 2.0,
+      "saving_qubo": 2.0
+    },
+    {
+      "book": 19,
+      "1F": {
+        "H": 14,
+        "qubits": 120,
+        "qubits_dw": 108,
+        "optimum": 39.0,
+        "qubo_best": 39.0,
+        "makespan": 14,
+        "tardiness": 11.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 166,
+        "qubits_dw": 154,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 10,
+        "tardiness": 4.0
+      },
+      "saving": 15.0,
+      "saving_qubo": 15.0
+    },
+    {
+      "book": 20,
+      "1F": {
+        "H": 14,
+        "qubits": 112,
+        "qubits_dw": 100,
+        "optimum": 44.0,
+        "qubo_best": 44.0,
+        "makespan": 13,
+        "tardiness": 18.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 161,
+        "qubits_dw": 149,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 11,
+        "tardiness": 2.0
+      },
+      "saving": 20.0,
+      "saving_qubo": 20.0
+    },
+    {
+      "book": 21,
+      "1F": {
+        "H": 13,
+        "qubits": 109,
+        "qubits_dw": 97,
+        "optimum": 27.0,
+        "qubo_best": 27.0,
+        "makespan": 12,
+        "tardiness": 3.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 148,
+        "qubits_dw": 136,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 7.0,
+      "saving_qubo": 7.0
+    },
+    {
+      "book": 22,
+      "1F": {
+        "H": 15,
+        "qubits": 132,
+        "qubits_dw": 120,
+        "optimum": 34.0,
+        "qubo_best": 34.0,
+        "makespan": 14,
+        "tardiness": 6.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 178,
+        "qubits_dw": 166,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 11,
+        "tardiness": 0.0
+      },
+      "saving": 12.0,
+      "saving_qubo": 12.0
+    },
+    {
+      "book": 23,
+      "1F": {
+        "H": 15,
+        "qubits": 120,
+        "qubits_dw": 108,
+        "optimum": 52.0,
+        "qubo_best": 52.0,
+        "makespan": 14,
+        "tardiness": 24.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 164,
+        "qubits_dw": 152,
+        "optimum": 30.0,
+        "qubo_best": 30.0,
+        "makespan": 12,
+        "tardiness": 6.0
+      },
+      "saving": 22.0,
+      "saving_qubo": 22.0
+    },
+    {
+      "book": 24,
+      "1F": {
+        "H": 12,
+        "qubits": 96,
+        "qubits_dw": 84,
+        "optimum": 29.0,
+        "qubo_best": 29.0,
+        "makespan": 12,
+        "tardiness": 5.0
+      },
+      "2F": {
+        "H": 12,
+        "qubits": 131,
+        "qubits_dw": 119,
+        "optimum": 21.0,
+        "qubo_best": 21.0,
+        "makespan": 10,
+        "tardiness": 1.0
+      },
+      "saving": 8.0,
+      "saving_qubo": 8.0
+    },
+    {
+      "book": 25,
+      "1F": {
+        "H": 16,
+        "qubits": 138,
+        "qubits_dw": 126,
+        "optimum": 42.0,
+        "qubo_best": 42.0,
+        "makespan": 15,
+        "tardiness": 12.0
+      },
+      "2F": {
+        "H": 16,
+        "qubits": 186,
+        "qubits_dw": 174,
+        "optimum": 27.0,
+        "qubo_best": 27.0,
+        "makespan": 12,
+        "tardiness": 3.0
+      },
+      "saving": 15.0,
+      "saving_qubo": 15.0
+    },
+    {
+      "book": 26,
+      "1F": {
+        "H": 13,
+        "qubits": 112,
+        "qubits_dw": 100,
+        "optimum": 36.0,
+        "qubo_best": 36.0,
+        "makespan": 13,
+        "tardiness": 10.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 152,
+        "qubits_dw": 140,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 16.0,
+      "saving_qubo": 16.0
+    },
+    {
+      "book": 27,
+      "1F": {
+        "H": 15,
+        "qubits": 118,
+        "qubits_dw": 106,
+        "optimum": 35.0,
+        "qubo_best": 35.0,
+        "makespan": 14,
+        "tardiness": 7.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 169,
+        "qubits_dw": 157,
+        "optimum": 23.0,
+        "qubo_best": 23.0,
+        "makespan": 11,
+        "tardiness": 1.0
+      },
+      "saving": 12.0,
+      "saving_qubo": 12.0
+    },
+    {
+      "book": 28,
+      "1F": {
+        "H": 14,
+        "qubits": 117,
+        "qubits_dw": 105,
+        "optimum": 30.0,
+        "qubo_best": 30.0,
+        "makespan": 13,
+        "tardiness": 4.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 161,
+        "qubits_dw": 149,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 10.0,
+      "saving_qubo": 10.0
+    },
+    {
+      "book": 29,
+      "1F": {
+        "H": 13,
+        "qubits": 107,
+        "qubits_dw": 95,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 12,
+        "tardiness": 0.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 148,
+        "qubits_dw": 136,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 4.0,
+      "saving_qubo": 4.0
+    },
+    {
+      "book": 30,
+      "1F": {
+        "H": 14,
+        "qubits": 106,
+        "qubits_dw": 94,
+        "optimum": 39.0,
+        "qubo_best": 39.0,
+        "makespan": 14,
+        "tardiness": 11.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 151,
+        "qubits_dw": 139,
+        "optimum": 29.0,
+        "qubo_best": 29.0,
+        "makespan": 12,
+        "tardiness": 5.0
+      },
+      "saving": 10.0,
+      "saving_qubo": 10.0
+    },
+    {
+      "book": 31,
+      "1F": {
+        "H": 13,
+        "qubits": 104,
+        "qubits_dw": 92,
+        "optimum": 34.0,
+        "qubo_best": 34.0,
+        "makespan": 13,
+        "tardiness": 8.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 143,
+        "qubits_dw": 131,
+        "optimum": 28.0,
+        "qubo_best": 28.0,
+        "makespan": 11,
+        "tardiness": 6.0
+      },
+      "saving": 6.0,
+      "saving_qubo": 6.0
+    },
+    {
+      "book": 32,
+      "1F": {
+        "H": 15,
+        "qubits": 122,
+        "qubits_dw": 110,
+        "optimum": 36.0,
+        "qubo_best": 36.0,
+        "makespan": 15,
+        "tardiness": 6.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 164,
+        "qubits_dw": 152,
+        "optimum": 27.0,
+        "qubo_best": 27.0,
+        "makespan": 13,
+        "tardiness": 1.0
+      },
+      "saving": 9.0,
+      "saving_qubo": 9.0
+    },
+    {
+      "book": 33,
+      "1F": {
+        "H": 14,
+        "qubits": 115,
+        "qubits_dw": 103,
+        "optimum": 43.0,
+        "qubo_best": 43.0,
+        "makespan": 14,
+        "tardiness": 15.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 161,
+        "qubits_dw": 149,
+        "optimum": 26.0,
+        "qubo_best": 26.0,
+        "makespan": 12,
+        "tardiness": 2.0
+      },
+      "saving": 17.0,
+      "saving_qubo": 17.0
+    },
+    {
+      "book": 34,
+      "1F": {
+        "H": 15,
+        "qubits": 126,
+        "qubits_dw": 114,
+        "optimum": 42.0,
+        "qubo_best": 42.0,
+        "makespan": 14,
+        "tardiness": 14.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 174,
+        "qubits_dw": 162,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 10,
+        "tardiness": 4.0
+      },
+      "saving": 18.0,
+      "saving_qubo": 18.0
+    },
+    {
+      "book": 35,
+      "1F": {
+        "H": 13,
+        "qubits": 110,
+        "qubits_dw": 98,
+        "optimum": 28.0,
+        "qubo_best": 28.0,
+        "makespan": 12,
+        "tardiness": 4.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 148,
+        "qubits_dw": 136,
+        "optimum": 20.0,
+        "qubo_best": 20.0,
+        "makespan": 10,
+        "tardiness": 0.0
+      },
+      "saving": 8.0,
+      "saving_qubo": 8.0
+    },
+    {
+      "book": 36,
+      "1F": {
+        "H": 13,
+        "qubits": 97,
+        "qubits_dw": 85,
+        "optimum": 30.0,
+        "qubo_best": 30.0,
+        "makespan": 13,
+        "tardiness": 4.0
+      },
+      "2F": {
+        "H": 13,
+        "qubits": 139,
+        "qubits_dw": 127,
+        "optimum": 24.0,
+        "qubo_best": 24.0,
+        "makespan": 12,
+        "tardiness": 0.0
+      },
+      "saving": 6.0,
+      "saving_qubo": 6.0
+    },
+    {
+      "book": 37,
+      "1F": {
+        "H": 15,
+        "qubits": 124,
+        "qubits_dw": 112,
+        "optimum": 31.0,
+        "qubo_best": 31.0,
+        "makespan": 14,
+        "tardiness": 3.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 168,
+        "qubits_dw": 156,
+        "optimum": 25.0,
+        "qubo_best": 25.0,
+        "makespan": 12,
+        "tardiness": 1.0
+      },
+      "saving": 6.0,
+      "saving_qubo": 6.0
+    },
+    {
+      "book": 38,
+      "1F": {
+        "H": 15,
+        "qubits": 118,
+        "qubits_dw": 106,
+        "optimum": 37.0,
+        "qubo_best": 37.0,
+        "makespan": 14,
+        "tardiness": 9.0
+      },
+      "2F": {
+        "H": 15,
+        "qubits": 169,
+        "qubits_dw": 157,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 11,
+        "tardiness": 0.0
+      },
+      "saving": 15.0,
+      "saving_qubo": 15.0
+    },
+    {
+      "book": 39,
+      "1F": {
+        "H": 14,
+        "qubits": 120,
+        "qubits_dw": 108,
+        "optimum": 26.0,
+        "qubo_best": 26.0,
+        "makespan": 13,
+        "tardiness": 0.0
+      },
+      "2F": {
+        "H": 14,
+        "qubits": 161,
+        "qubits_dw": 149,
+        "optimum": 22.0,
+        "qubo_best": 22.0,
+        "makespan": 11,
+        "tardiness": 0.0
+      },
+      "saving": 4.0,
+      "saving_qubo": 4.0
+    }
+  ]
+}

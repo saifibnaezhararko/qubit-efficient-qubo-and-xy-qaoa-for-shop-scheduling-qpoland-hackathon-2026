@@ -1,0 +1,10 @@
+numpy>=1.26
+scipy>=1.11
+matplotlib>=3.8
+ortools>=9.10        # CP-SAT classical reference
+dimod>=0.12          # BinaryQuadraticModel (used by the samplers / VeloxQ)
+dwave-samplers>=1.2  # simulated annealing + tabu search (classical QUBO solvers)
+qiskit>=1.2          # gate-level cross-check of the QAOA simulators
+pytest>=8
+# optional: VeloxQ QUBO solver (needs an access token in VELOX_TOKEN)
+# veloxq-sdk>=1.1

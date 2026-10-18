@@ -1,0 +1,97 @@
+{
+  "problem": "erp_scheduling",
+  "name": "L3_outage",
+  "description": "L2 + planned maintenance of the welding station S in [5, 6).",
+  "jobs": [
+    {
+      "id": "Z1",
+      "operations": [
+        {
+          "machine": "T",
+          "duration": 2
+        },
+        {
+          "machine": "F",
+          "duration": 1
+        },
+        {
+          "machine": "S",
+          "duration": 2
+        }
+      ],
+      "due_date": 7,
+      "weight": 3,
+      "family": "A"
+    },
+    {
+      "id": "Z2",
+      "operations": [
+        {
+          "machine": "T",
+          "duration": 1
+        },
+        {
+          "machine": "F",
+          "duration": 2
+        },
+        {
+          "machine": "S",
+          "duration": 1
+        }
+      ],
+      "due_date": 6,
+      "weight": 1,
+      "family": "B"
+    },
+    {
+      "id": "Z3",
+      "operations": [
+        {
+          "machine": "T",
+          "duration": 2
+        },
+        {
+          "machine": "F",
+          "duration": 2
+        },
+        {
+          "machine": "S",
+          "duration": 1
+        }
+      ],
+      "due_date": 9,
+      "weight": 1,
+      "family": "A"
+    }
+  ],
+  "setup_times": {
+    "F": {
+      "A": {
+        "B": 1
+      },
+      "B": {
+        "A": 1
+      }
+    },
+    "S": {
+      "A": {
+        "B": 1
+      },
+      "B": {
+        "A": 1
+      }
+    }
+  },
+  "unavailability": [
+    {
+      "machine": "S",
+      "start": 5,
+      "end": 6,
+      "reason": "maintenance"
+    }
+  ],
+  "objective": {
+    "makespan": 2,
+    "weighted_tardiness": 1
+  }
+}

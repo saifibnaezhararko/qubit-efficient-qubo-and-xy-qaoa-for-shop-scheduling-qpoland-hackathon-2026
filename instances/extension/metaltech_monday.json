@@ -1,0 +1,113 @@
+{
+  "problem": "erp_scheduling",
+  "name": "metaltech_monday",
+  "description": "Integrated Stage-2 model. L3 + an urgent repair part Z4 with its own route (milling F, then turning T; no welding), family B, due at 6 with weight 2. Job shop with setups, maintenance, due dates.",
+  "jobs": [
+    {
+      "id": "Z1",
+      "operations": [
+        {
+          "machine": "T",
+          "duration": 2
+        },
+        {
+          "machine": "F",
+          "duration": 1
+        },
+        {
+          "machine": "S",
+          "duration": 2
+        }
+      ],
+      "due_date": 7,
+      "weight": 3,
+      "family": "A"
+    },
+    {
+      "id": "Z2",
+      "operations": [
+        {
+          "machine": "T",
+          "duration": 1
+        },
+        {
+          "machine": "F",
+          "duration": 2
+        },
+        {
+          "machine": "S",
+          "duration": 1
+        }
+      ],
+      "due_date": 6,
+      "weight": 1,
+      "family": "B"
+    },
+    {
+      "id": "Z3",
+      "operations": [
+        {
+          "machine": "T",
+          "duration": 2
+        },
+        {
+          "machine": "F",
+          "duration": 2
+        },
+        {
+          "machine": "S",
+          "duration": 1
+        }
+      ],
+      "due_date": 9,
+      "weight": 1,
+      "family": "A"
+    },
+    {
+      "id": "Z4",
+      "operations": [
+        {
+          "machine": "F",
+          "duration": 1
+        },
+        {
+          "machine": "T",
+          "duration": 1
+        }
+      ],
+      "due_date": 6,
+      "weight": 2,
+      "family": "B"
+    }
+  ],
+  "setup_times": {
+    "F": {
+      "A": {
+        "B": 1
+      },
+      "B": {
+        "A": 1
+      }
+    },
+    "S": {
+      "A": {
+        "B": 1
+      },
+      "B": {
+        "A": 1
+      }
+    }
+  },
+  "unavailability": [
+    {
+      "machine": "S",
+      "start": 5,
+      "end": 6,
+      "reason": "maintenance"
+    }
+  ],
+  "objective": {
+    "makespan": 2,
+    "weighted_tardiness": 1
+  }
+}

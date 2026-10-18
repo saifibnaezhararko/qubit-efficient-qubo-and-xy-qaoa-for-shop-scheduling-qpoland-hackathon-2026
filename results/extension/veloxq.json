@@ -1,0 +1,440 @@
+{
+  "features": [
+    "due_dates",
+    "setups",
+    "routes",
+    "outage"
+  ],
+  "lns_k": 6,
+  "lns_batch": 8,
+  "lns_iterations": 30,
+  "lns_veloxq_reads": 256,
+  "rows": [
+    {
+      "n_jobs": 4,
+      "instance": "rand_n4_s4000",
+      "operations": 11,
+      "H": 13,
+      "optimum": 43.0,
+      "qubits": 74,
+      "quadratic_terms": 532,
+      "penalty": 56.0,
+      "sa": {
+        "p_optimal": 0.006666666666666667,
+        "p_feasible": 0.89,
+        "best": 43.0,
+        "reads": 600
+      },
+      "veloxq": {
+        "p_optimal": 0.017578125,
+        "p_feasible": 0.4052734375,
+        "best": 43.0,
+        "solver_time_s": 0.125384258,
+        "wall_time_s": 7.5,
+        "num_rep": 1024,
+        "num_steps": 5000
+      }
+    },
+    {
+      "n_jobs": 6,
+      "instance": "rand_n6_s6000",
+      "operations": 15,
+      "H": 12,
+      "optimum": 24.0,
+      "qubits": 130,
+      "quadratic_terms": 1344,
+      "penalty": 38.0,
+      "sa": {
+        "p_optimal": 0.015000000000000001,
+        "p_feasible": 0.5266666666666667,
+        "best": 24.0,
+        "reads": 600
+      },
+      "veloxq": {
+        "p_optimal": 0.0009765625,
+        "p_feasible": 0.1396484375,
+        "best": 24.0,
+        "solver_time_s": 0.126213563,
+        "wall_time_s": 8.1,
+        "num_rep": 1024,
+        "num_steps": 5000
+      }
+    },
+    {
+      "n_jobs": 8,
+      "instance": "rand_n8_s8000",
+      "operations": 21,
+      "H": 17,
+      "optimum": 38.0,
+      "qubits": 272,
+      "quadratic_terms": 4679,
+      "penalty": 94.0,
+      "sa": {
+        "p_optimal": 0.0,
+        "p_feasible": 0.7466666666666667,
+        "best": 49.0,
+        "reads": 600
+      },
+      "veloxq": {
+        "p_optimal": 0.0,
+        "p_feasible": 0.212890625,
+        "best": 50.0,
+        "solver_time_s": 0.182651899,
+        "wall_time_s": 4.9,
+        "num_rep": 1024,
+        "num_steps": 5000
+      },
+      "levers": {
+        "more steps (x4)": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.2490234375,
+          "best": 49.0,
+          "solver_time_s": 0.725518243,
+          "wall_time_s": 4.0,
+          "num_rep": 1024,
+          "num_steps": 20000
+        },
+        "penalty x0.5": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.24609375,
+          "best": 48.0,
+          "solver_time_s": 0.182715264,
+          "wall_time_s": 2.9,
+          "num_rep": 1024,
+          "num_steps": 5000
+        },
+        "penalty x0.25": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.16796875,
+          "best": 44.0,
+          "solver_time_s": 0.182332984,
+          "wall_time_s": 2.9,
+          "num_rep": 1024,
+          "num_steps": 5000
+        },
+        "coefficients scaled to max 1": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.1806640625,
+          "best": 50.0,
+          "solver_time_s": 0.182635248,
+          "wall_time_s": 2.6,
+          "num_rep": 1024,
+          "num_steps": 5000
+        }
+      },
+      "lns_start": {
+        "objective": 50.0,
+        "source": "best read of the whole-QUBO VeloxQ call"
+      },
+      "lns_veloxq": {
+        "best": 38.0,
+        "rounds": 5,
+        "solver_calls": 5,
+        "sub_qubos": 40,
+        "accepted_moves": 5,
+        "solver_time_s": 1.227293642,
+        "wall_time_s": 53.23221879999892,
+        "qubits_per_round_median": 940.0,
+        "qubits_per_round_max": 1062,
+        "trajectory": [
+          47.0,
+          44.0,
+          41.0,
+          41.0,
+          38.0
+        ]
+      },
+      "lns_sa": {
+        "best": 41.0,
+        "rounds": 30,
+        "solver_calls": null,
+        "sub_qubos": 240,
+        "accepted_moves": 39,
+        "solver_time_s": 87.74087070000132,
+        "wall_time_s": 161.68336300000192,
+        "qubits_per_round_median": 913.0,
+        "qubits_per_round_max": 1062,
+        "trajectory": [
+          48.0,
+          43.0,
+          43.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0,
+          41.0
+        ]
+      }
+    },
+    {
+      "n_jobs": 10,
+      "instance": "rand_n10_s10000",
+      "operations": 27,
+      "H": 20,
+      "optimum": 54.0,
+      "qubits": 415,
+      "quadratic_terms": 9208,
+      "penalty": 125.0,
+      "sa": {
+        "p_optimal": 0.0,
+        "p_feasible": 0.09999999999999999,
+        "best": 63.0,
+        "reads": 600
+      },
+      "veloxq": {
+        "p_optimal": 0.0,
+        "p_feasible": 0.056640625,
+        "best": 66.0,
+        "solver_time_s": 0.49866956,
+        "wall_time_s": 6.8,
+        "num_rep": 1024,
+        "num_steps": 5000
+      },
+      "levers": {
+        "more steps (x4)": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.1748046875,
+          "best": 66.0,
+          "solver_time_s": 1.124063865,
+          "wall_time_s": 3.8,
+          "num_rep": 1024,
+          "num_steps": 20000
+        },
+        "penalty x0.5": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.056640625,
+          "best": 64.0,
+          "solver_time_s": 0.28541318,
+          "wall_time_s": 3.9,
+          "num_rep": 1024,
+          "num_steps": 5000
+        },
+        "penalty x0.25": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.041015625,
+          "best": 63.0,
+          "solver_time_s": 0.284353008,
+          "wall_time_s": 3.7,
+          "num_rep": 1024,
+          "num_steps": 5000
+        },
+        "coefficients scaled to max 1": {
+          "p_optimal": 0.0,
+          "p_feasible": 0.0498046875,
+          "best": 60.0,
+          "solver_time_s": 0.283542127,
+          "wall_time_s": 6.6,
+          "num_rep": 1024,
+          "num_steps": 5000
+        }
+      },
+      "lns_start": {
+        "objective": 66.0,
+        "source": "best read of the whole-QUBO VeloxQ call"
+      },
+      "lns_veloxq": {
+        "best": 55.0,
+        "rounds": 30,
+        "solver_calls": 30,
+        "sub_qubos": 240,
+        "accepted_moves": 117,
+        "solver_time_s": 3.659252338,
+        "wall_time_s": 219.2046330999974,
+        "qubits_per_round_median": 460.5,
+        "qubits_per_round_max": 633,
+        "trajectory": [
+          57.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0
+        ]
+      },
+      "lns_sa": {
+        "best": 54.0,
+        "rounds": 10,
+        "solver_calls": null,
+        "sub_qubos": 80,
+        "accepted_moves": 23,
+        "solver_time_s": 12.882093100011843,
+        "wall_time_s": 26.389299700003903,
+        "qubits_per_round_median": 442.0,
+        "qubits_per_round_max": 559,
+        "trajectory": [
+          57.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          55.0,
+          54.0
+        ]
+      }
+    },
+    {
+      "n_jobs": 12,
+      "instance": "rand_n12_s12000",
+      "operations": 33,
+      "H": 27,
+      "optimum": 106.0,
+      "qubits": 726,
+      "quadratic_terms": 24778,
+      "penalty": 292.0,
+      "sa": {
+        "p_optimal": 0.0,
+        "p_feasible": 0.04,
+        "best": 155.0,
+        "reads": 600
+      },
+      "veloxq": {
+        "p_optimal": 0.0,
+        "p_feasible": 0.0009765625,
+        "best": 169.0,
+        "solver_time_s": 0.548570367,
+        "wall_time_s": 5.7,
+        "num_rep": 1024,
+        "num_steps": 5000
+      },
+      "lns_start": {
+        "objective": 169.0,
+        "source": "best read of the whole-QUBO VeloxQ call"
+      },
+      "lns_veloxq": {
+        "best": 122.0,
+        "rounds": 30,
+        "solver_calls": 30,
+        "sub_qubos": 240,
+        "accepted_moves": 148,
+        "solver_time_s": 3.564764872,
+        "wall_time_s": 216.96541190000607,
+        "qubits_per_round_median": 368.5,
+        "qubits_per_round_max": 643,
+        "trajectory": [
+          163.0,
+          159.0,
+          147.0,
+          145.0,
+          139.0,
+          127.0,
+          127.0,
+          127.0,
+          127.0,
+          127.0,
+          127.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0,
+          122.0
+        ]
+      },
+      "lns_sa": {
+        "best": 108.0,
+        "rounds": 30,
+        "solver_calls": null,
+        "sub_qubos": 240,
+        "accepted_moves": 121,
+        "solver_time_s": 29.241458699998475,
+        "wall_time_s": 69.74836659999892,
+        "qubits_per_round_median": 389.0,
+        "qubits_per_round_max": 632,
+        "trajectory": [
+          163.0,
+          159.0,
+          154.0,
+          147.0,
+          147.0,
+          131.0,
+          124.0,
+          122.0,
+          113.0,
+          113.0,
+          112.0,
+          112.0,
+          112.0,
+          112.0,
+          112.0,
+          112.0,
+          112.0,
+          112.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0,
+          108.0
+        ]
+      }
+    }
+  ]
+}

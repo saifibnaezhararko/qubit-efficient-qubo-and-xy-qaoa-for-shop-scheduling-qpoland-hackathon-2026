@@ -1,0 +1,412 @@
+{
+  "ladder": [
+    {
+      "step": "baseline 3x3",
+      "instance": "instance_3x3",
+      "features": [
+        "baseline"
+      ],
+      "operations": 9,
+      "LB": 8,
+      "FIFO_makespan": 8,
+      "FIFO_objective": 8.0,
+      "horizon_ascent": [
+        {
+          "H": 8,
+          "status": "solved",
+          "qubits": 33,
+          "certified": true
+        }
+      ],
+      "H": 8,
+      "naive_at_FIFO_horizon": 72,
+      "q_none": 72,
+      "q_horizon": 67,
+      "q_window": 39,
+      "q_ac3": 39,
+      "q_sac": 33,
+      "q_domain_wall": 24,
+      "aux_qubits": 0,
+      "quadratic_terms_naive": 638,
+      "quadratic_terms_sac": 123,
+      "quadratic_terms_dw": 87,
+      "subspace_dim": 103680,
+      "penalty": 1.0,
+      "wall_penalty": 10.0,
+      "qubo_optimum": 8.0,
+      "cpsat_optimum": 8.0,
+      "horizon_certified": true,
+      "dw_exhaustive_certified": true,
+      "qubo_solved_by": "exact (subspace enumeration)",
+      "seconds": 4.54,
+      "exact": true
+    },
+    {
+      "step": "+ due dates",
+      "instance": "L1_due_dates",
+      "features": [
+        "due dates"
+      ],
+      "operations": 9,
+      "LB": 8,
+      "FIFO_makespan": 8,
+      "FIFO_objective": 16.0,
+      "horizon_ascent": [
+        {
+          "H": 8,
+          "status": "solved",
+          "qubits": 33,
+          "certified": true
+        }
+      ],
+      "H": 8,
+      "naive_at_FIFO_horizon": 72,
+      "q_none": 73,
+      "q_horizon": 67,
+      "q_window": 39,
+      "q_ac3": 39,
+      "q_sac": 33,
+      "q_domain_wall": 24,
+      "aux_qubits": 0,
+      "quadratic_terms_naive": 639,
+      "quadratic_terms_sac": 123,
+      "quadratic_terms_dw": 87,
+      "subspace_dim": 103680,
+      "penalty": 1.0,
+      "wall_penalty": 10.0,
+      "qubo_optimum": 16.0,
+      "cpsat_optimum": 16.0,
+      "horizon_certified": true,
+      "dw_exhaustive_certified": true,
+      "qubo_solved_by": "exact (subspace enumeration)",
+      "seconds": 3.65,
+      "exact": true
+    },
+    {
+      "step": "+ setups",
+      "instance": "L2_setups",
+      "features": [
+        "setup times",
+        "due dates"
+      ],
+      "operations": 9,
+      "LB": 8,
+      "FIFO_makespan": 10,
+      "FIFO_objective": 22.0,
+      "horizon_ascent": [
+        {
+          "H": 8,
+          "status": "solved",
+          "qubits": 0,
+          "certified": true
+        }
+      ],
+      "H": 8,
+      "naive_at_FIFO_horizon": 90,
+      "q_none": 73,
+      "q_horizon": 67,
+      "q_window": 39,
+      "q_ac3": 35,
+      "q_sac": 0,
+      "q_domain_wall": 0,
+      "aux_qubits": 0,
+      "quadratic_terms_naive": 691,
+      "quadratic_terms_sac": 0,
+      "quadratic_terms_dw": 0,
+      "subspace_dim": 1,
+      "penalty": 1.0,
+      "wall_penalty": 1.0,
+      "qubo_optimum": 16.0,
+      "cpsat_optimum": 16.0,
+      "horizon_certified": true,
+      "dw_exhaustive_certified": true,
+      "qubo_solved_by": "exact (subspace enumeration)",
+      "seconds": 0.02,
+      "exact": true
+    },
+    {
+      "step": "+ maintenance",
+      "instance": "L3_outage",
+      "features": [
+        "setup times",
+        "machine outages",
+        "due dates"
+      ],
+      "operations": 9,
+      "LB": 8,
+      "FIFO_makespan": 10,
+      "FIFO_objective": 22.0,
+      "horizon_ascent": [
+        {
+          "H": 8,
+          "status": "infeasible (propagation proof)",
+          "qubits": null,
+          "certified": false
+        },
+        {
+          "H": 9,
+          "status": "solved",
+          "qubits": 25,
+          "certified": true
+        }
+      ],
+      "H": 9,
+      "naive_at_FIFO_horizon": 90,
+      "q_none": 83,
+      "q_horizon": 77,
+      "q_window": 45,
+      "q_ac3": 44,
+      "q_sac": 25,
+      "q_domain_wall": 16,
+      "aux_qubits": 1,
+      "quadratic_terms_naive": 852,
+      "quadratic_terms_sac": 57,
+      "quadratic_terms_dw": 33,
+      "subspace_dim": 9216,
+      "penalty": 6.0,
+      "wall_penalty": 36.0,
+      "qubo_optimum": 21.0,
+      "cpsat_optimum": 21.0,
+      "horizon_certified": true,
+      "dw_exhaustive_certified": true,
+      "qubo_solved_by": "exact (subspace enumeration)",
+      "seconds": 0.04,
+      "exact": true
+    },
+    {
+      "step": "+ job Z4, own route",
+      "instance": "metaltech_monday",
+      "features": [
+        "per-job routes",
+        "setup times",
+        "machine outages",
+        "due dates"
+      ],
+      "operations": 11,
+      "LB": 7,
+      "FIFO_makespan": 12,
+      "FIFO_objective": 38.0,
+      "horizon_ascent": [
+        {
+          "H": 7,
+          "status": "infeasible (propagation proof)",
+          "qubits": null,
+          "certified": false
+        },
+        {
+          "H": 8,
+          "status": "infeasible (propagation proof)",
+          "qubits": null,
+          "certified": false
+        },
+        {
+          "H": 9,
+          "status": "solved",
+          "qubits": 35,
+          "certified": true
+        }
+      ],
+      "H": 9,
+      "naive_at_FIFO_horizon": 132,
+      "q_none": 102,
+      "q_horizon": 96,
+      "q_window": 62,
+      "q_ac3": 61,
+      "q_sac": 35,
+      "q_domain_wall": 24,
+      "aux_qubits": 2,
+      "quadratic_terms_naive": 1096,
+      "quadratic_terms_sac": 97,
+      "quadratic_terms_dw": 59,
+      "subspace_dim": 331776,
+      "penalty": 17.0,
+      "wall_penalty": 153.0,
+      "qubo_optimum": 21.0,
+      "cpsat_optimum": 21.0,
+      "horizon_certified": true,
+      "dw_exhaustive_certified": true,
+      "qubo_solved_by": "exact (subspace enumeration)",
+      "seconds": 1.99,
+      "exact": true
+    },
+    {
+      "step": "+ 2nd milling machine",
+      "instance": "metaltech_monday_2F",
+      "features": [
+        "per-job routes",
+        "parallel machines",
+        "setup times",
+        "machine outages",
+        "due dates"
+      ],
+      "operations": 11,
+      "LB": 7,
+      "FIFO_makespan": 9,
+      "FIFO_objective": 21.0,
+      "horizon_ascent": [
+        {
+          "H": 7,
+          "status": "infeasible (propagation proof)",
+          "qubits": null,
+          "certified": false
+        },
+        {
+          "H": 8,
+          "status": "infeasible (propagation proof)",
+          "qubits": null,
+          "certified": false
+        },
+        {
+          "H": 9,
+          "status": "solved",
+          "qubits": 80,
+          "certified": true
+        }
+      ],
+      "H": 9,
+      "naive_at_FIFO_horizon": 135,
+      "q_none": 138,
+      "q_horizon": 130,
+      "q_window": 86,
+      "q_ac3": 86,
+      "q_sac": 80,
+      "q_domain_wall": 69,
+      "aux_qubits": 2,
+      "quadratic_terms_naive": 2073,
+      "quadratic_terms_sac": 721,
+      "quadratic_terms_dw": 397,
+      "subspace_dim": 1415577600,
+      "penalty": 8.0,
+      "wall_penalty": 192.0,
+      "qubo_optimum": 19.0,
+      "cpsat_optimum": 19.0,
+      "horizon_certified": true,
+      "dw_exhaustive_certified": null,
+      "qubo_solved_by": "simulated annealing",
+      "seconds": 1.95,
+      "exact": true
+    }
+  ],
+  "horizon_effect": [
+    {
+      "H": 9,
+      "pruning": "none",
+      "qubits": 102,
+      "subspace_dim": 251048476872
+    },
+    {
+      "H": 9,
+      "pruning": "horizon",
+      "qubits": 96,
+      "subspace_dim": 69657034752
+    },
+    {
+      "H": 9,
+      "pruning": "window",
+      "qubits": 62,
+      "subspace_dim": 345600000
+    },
+    {
+      "H": 9,
+      "pruning": "ac3",
+      "qubits": 61,
+      "subspace_dim": 288000000
+    },
+    {
+      "H": 9,
+      "pruning": "sac",
+      "qubits": 35,
+      "subspace_dim": 331776
+    },
+    {
+      "H": 10,
+      "pruning": "none",
+      "qubits": 114,
+      "subspace_dim": 1600000000000
+    },
+    {
+      "H": 10,
+      "pruning": "horizon",
+      "qubits": 108,
+      "subspace_dim": 472392000000
+    },
+    {
+      "H": 10,
+      "pruning": "window",
+      "qubits": 74,
+      "subspace_dim": 4938071040
+    },
+    {
+      "H": 10,
+      "pruning": "ac3",
+      "qubits": 74,
+      "subspace_dim": 4938071040
+    },
+    {
+      "H": 10,
+      "pruning": "sac",
+      "qubits": 68,
+      "subspace_dim": 1814400000
+    },
+    {
+      "H": 11,
+      "pruning": "none",
+      "qubits": 126,
+      "subspace_dim": 9129973459552
+    },
+    {
+      "H": 11,
+      "pruning": "horizon",
+      "qubits": 120,
+      "subspace_dim": 2834497600000
+    },
+    {
+      "H": 11,
+      "pruning": "window",
+      "qubits": 86,
+      "subspace_dim": 51631104000
+    },
+    {
+      "H": 11,
+      "pruning": "ac3",
+      "qubits": 86,
+      "subspace_dim": 51631104000
+    },
+    {
+      "H": 11,
+      "pruning": "sac",
+      "qubits": 86,
+      "subspace_dim": 51631104000
+    },
+    {
+      "H": 12,
+      "pruning": "none",
+      "qubits": 138,
+      "subspace_dim": 47552535724032
+    },
+    {
+      "H": 12,
+      "pruning": "horizon",
+      "qubits": 132,
+      "subspace_dim": 15388662693888
+    },
+    {
+      "H": 12,
+      "pruning": "window",
+      "qubits": 98,
+      "subspace_dim": 431637921792
+    },
+    {
+      "H": 12,
+      "pruning": "ac3",
+      "qubits": 98,
+      "subspace_dim": 431637921792
+    },
+    {
+      "H": 12,
+      "pruning": "sac",
+      "qubits": 98,
+      "subspace_dim": 431637921792
+    }
+  ]
+}

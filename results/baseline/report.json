@@ -1,0 +1,931 @@
+{
+  "date": "2026-10-18 07:41 UTC",
+  "seed": 7,
+  "shots": 4096,
+  "instance_a": {
+    "reference": {
+      "lower_bound": 4,
+      "fifo_makespan": 5,
+      "cpsat_status": "OPTIMAL",
+      "cpsat_makespan": 4,
+      "brute_force_makespan": 4,
+      "optimum": 4.0
+    },
+    "horizon": 5,
+    "qubo_sizes": [
+      {
+        "horizon": 5,
+        "lower_bound": 4,
+        "pruning": "none",
+        "makespan_encoding": "exp",
+        "start_variables": 20,
+        "aux_variables": 0,
+        "qubits": 20,
+        "fixed_operations": 0,
+        "quadratic_terms": 92,
+        "terms_by_kind": {
+          "onehot": 40,
+          "prec": 34,
+          "cap": 18
+        },
+        "subspace_dim": 625,
+        "penalty": 2.0,
+        "objective_bound_U": 1.0,
+        "max_abs": 4.0,
+        "min_abs": 1.0,
+        "dynamic_range": 4.0
+      },
+      {
+        "horizon": 5,
+        "lower_bound": 4,
+        "pruning": "horizon",
+        "makespan_encoding": "exp",
+        "start_variables": 18,
+        "aux_variables": 0,
+        "qubits": 18,
+        "fixed_operations": 0,
+        "quadratic_terms": 76,
+        "terms_by_kind": {
+          "onehot": 32,
+          "prec": 28,
+          "cap": 16
+        },
+        "subspace_dim": 400,
+        "penalty": 2.0,
+        "objective_bound_U": 1.0,
+        "max_abs": 4.0,
+        "min_abs": 1.0,
+        "dynamic_range": 4.0
+      },
+      {
+        "horizon": 5,
+        "lower_bound": 4,
+        "pruning": "window",
+        "makespan_encoding": "exp",
+        "start_variables": 12,
+        "aux_variables": 0,
+        "qubits": 12,
+        "fixed_operations": 0,
+        "quadratic_terms": 28,
+        "terms_by_kind": {
+          "onehot": 12,
+          "prec": 6,
+          "cap": 10
+        },
+        "subspace_dim": 81,
+        "penalty": 2.0,
+        "objective_bound_U": 1.0,
+        "max_abs": 4.0,
+        "min_abs": 1.0,
+        "dynamic_range": 4.0
+      },
+      {
+        "horizon": 5,
+        "lower_bound": 4,
+        "pruning": "ac3",
+        "makespan_encoding": "exp",
+        "start_variables": 12,
+        "aux_variables": 0,
+        "qubits": 12,
+        "fixed_operations": 0,
+        "quadratic_terms": 28,
+        "terms_by_kind": {
+          "onehot": 12,
+          "prec": 6,
+          "cap": 10
+        },
+        "subspace_dim": 81,
+        "penalty": 2.0,
+        "objective_bound_U": 1.0,
+        "max_abs": 4.0,
+        "min_abs": 1.0,
+        "dynamic_range": 4.0
+      },
+      {
+        "horizon": 5,
+        "lower_bound": 4,
+        "pruning": "sac",
+        "makespan_encoding": "exp",
+        "start_variables": 12,
+        "aux_variables": 0,
+        "qubits": 12,
+        "fixed_operations": 0,
+        "quadratic_terms": 28,
+        "terms_by_kind": {
+          "onehot": 12,
+          "prec": 6,
+          "cap": 10
+        },
+        "subspace_dim": 81,
+        "penalty": 2.0,
+        "objective_bound_U": 1.0,
+        "max_abs": 4.0,
+        "min_abs": 1.0,
+        "dynamic_range": 4.0
+      }
+    ],
+    "formulation": {
+      "horizon": 5,
+      "lower_bound": 4,
+      "pruning": "sac",
+      "makespan_encoding": "exp",
+      "start_variables": 12,
+      "aux_variables": 0,
+      "qubits": 12,
+      "fixed_operations": 0,
+      "quadratic_terms": 28,
+      "terms_by_kind": {
+        "onehot": 12,
+        "prec": 6,
+        "cap": 10
+      },
+      "subspace_dim": 81,
+      "penalty": 2.0,
+      "objective_bound_U": 1.0,
+      "max_abs": 4.0,
+      "min_abs": 1.0,
+      "dynamic_range": 4.0
+    },
+    "certificate": {
+      "method": "all 2^12 states",
+      "ground_energy": 0.0,
+      "ground_states": 1,
+      "all_ground_states_optimal": true
+    },
+    "qaoa": {
+      "solver": "QAOA X-mixer p=6",
+      "qubits": 12,
+      "samples": 4096,
+      "feasible_fraction": 0.393311,
+      "optimal_fraction": 0.108398,
+      "best_objective": 4.0,
+      "best_makespan": 4,
+      "best_energy": 0.0,
+      "wall_time_s": 16.976,
+      "p": 6,
+      "p_optimal_exact": 0.09937332226439087,
+      "p_feasible_exact": 0.3873436331071165,
+      "uniform_p_optimal": 0.000244140625,
+      "evaluations": 1414,
+      "gammas": [
+        -0.266414,
+        0.234094,
+        1.050174,
+        1.086929,
+        1.302289,
+        1.703464
+      ],
+      "betas": [
+        1.044072,
+        -0.586046,
+        -0.274543,
+        -0.194002,
+        -0.186547,
+        -0.124581
+      ],
+      "cvar_alpha": 1.0,
+      "simulated_dimension": 4096
+    },
+    "qaoa_history": [
+      {
+        "p": 1,
+        "loss": 1.7811350389336504,
+        "expectation": 5.3434051168009535,
+        "p_ground": 0.0041976408498104415,
+        "p_feasible": 0.02577648318064988,
+        "evaluations": 66,
+        "seconds": 0.16747179999993023,
+        "gammas": [
+          -0.5105808399405255
+        ],
+        "betas": [
+          0.4653370720589528
+        ]
+      },
+      {
+        "p": 2,
+        "loss": 1.330506334069397,
+        "expectation": 3.991519002208193,
+        "p_ground": 0.019570727811241393,
+        "p_feasible": 0.1077668132283858,
+        "evaluations": 185,
+        "seconds": 0.9337699999996403,
+        "gammas": [
+          -0.4759997412726872,
+          1.682968284821075
+        ],
+        "betas": [
+          0.3634032203711844,
+          -0.1983451057038301
+        ]
+      },
+      {
+        "p": 3,
+        "loss": 1.1233398731134416,
+        "expectation": 3.370019619340326,
+        "p_ground": 0.035217015814971664,
+        "p_feasible": 0.1717401793383606,
+        "evaluations": 360,
+        "seconds": 2.4903636999997616,
+        "gammas": [
+          -0.469962011406041,
+          1.3239352842193675,
+          1.299431000223961
+        ],
+        "betas": [
+          0.318380628849694,
+          -0.24227640993545593,
+          -0.15637792650624954
+        ]
+      },
+      {
+        "p": 4,
+        "loss": 0.9936836178731794,
+        "expectation": 2.9810508536195384,
+        "p_ground": 0.041331958132665436,
+        "p_feasible": 0.20576876607896308,
+        "evaluations": 610,
+        "seconds": 5.284940299999562,
+        "gammas": [
+          -0.3498044361592048,
+          0.20721258691458044,
+          1.363221123364467,
+          1.6078471238811542
+        ],
+        "betas": [
+          0.9848772781500627,
+          -0.5330972960403745,
+          -0.21571360419984478,
+          -0.14004826828643058
+        ]
+      },
+      {
+        "p": 5,
+        "loss": 0.8689231815063236,
+        "expectation": 2.60676954451897,
+        "p_ground": 0.06471446028083726,
+        "p_feasible": 0.28629380482509,
+        "evaluations": 927,
+        "seconds": 9.409864699999616,
+        "gammas": [
+          -0.3175261490797371,
+          0.20820909294203085,
+          1.1696736650491417,
+          1.2315482458993736,
+          1.6213689360457004
+        ],
+        "betas": [
+          1.0318632559648888,
+          -0.5917629242647434,
+          -0.22977855105212486,
+          -0.1846990881051991,
+          -0.12425887547159487
+        ]
+      },
+      {
+        "p": 6,
+        "loss": 0.7403228930609237,
+        "expectation": 2.2209686791827714,
+        "p_ground": 0.09937332226439087,
+        "p_feasible": 0.3873436331071165,
+        "evaluations": 1414,
+        "seconds": 16.968357699999615,
+        "gammas": [
+          -0.2664136429633539,
+          0.23409354460667067,
+          1.0501737471549357,
+          1.0869288316675447,
+          1.3022889868861405,
+          1.7034643991634126
+        ],
+        "betas": [
+          1.0440724804234691,
+          -0.586046056944557,
+          -0.2745426784469595,
+          -0.19400246655255174,
+          -0.18654717462356568,
+          -0.12458081804754352
+        ]
+      }
+    ],
+    "qiskit_max_prob_diff": 9.020562075079397e-17,
+    "permutation": {
+      "jobs": 2,
+      "permutations": 2,
+      "code_qubits": 1,
+      "aux_qubits": 0,
+      "qubits": 1,
+      "hubo_degree": 1,
+      "quadratic_terms": 0,
+      "invalid_code_penalty": 6.0,
+      "aux_penalties": [],
+      "cost_table_evaluations": 2,
+      "certificate": {
+        "method": "all 2^1 states",
+        "ground_energy": 4.0,
+        "ground_states": 1,
+        "all_ground_states_optimal": true
+      },
+      "qaoa": {
+        "solver": "QAOA X-mixer p=3",
+        "qubits": 1,
+        "samples": 4096,
+        "feasible_fraction": 1.0,
+        "optimal_fraction": 1.0,
+        "best_objective": 4.0,
+        "best_makespan": 4,
+        "best_energy": 4.0,
+        "wall_time_s": 0.057,
+        "p": 3,
+        "p_optimal_exact": 1.0,
+        "p_feasible_exact": 1.0,
+        "uniform_p_optimal": 0.5,
+        "evaluations": 141,
+        "gammas": [
+          -0.106485,
+          1.028696,
+          1.378755
+        ],
+        "betas": [
+          0.512126,
+          -0.053828,
+          0.644606
+        ],
+        "cvar_alpha": 1.0,
+        "simulated_dimension": 2
+      }
+    },
+    "schedule": {
+      "instance": "instance_2x2",
+      "method": "QAOA p=6 (X-mixer, state-vector simulator), 12-qubit time-indexed QUBO, H=5",
+      "makespan": 4,
+      "schedule": [
+        {
+          "job": "Z2",
+          "machine": "T",
+          "start": 0,
+          "end": 1
+        },
+        {
+          "job": "Z2",
+          "machine": "F",
+          "start": 1,
+          "end": 3
+        },
+        {
+          "job": "Z1",
+          "machine": "T",
+          "start": 1,
+          "end": 3
+        },
+        {
+          "job": "Z1",
+          "machine": "F",
+          "start": 3,
+          "end": 4
+        }
+      ]
+    }
+  },
+  "instance_b": {
+    "reference": {
+      "lower_bound": 8,
+      "fifo_makespan": 8,
+      "cpsat_status": "OPTIMAL",
+      "cpsat_makespan": 8,
+      "brute_force_makespan": 8,
+      "optimum": 8.0
+    },
+    "horizon": 8,
+    "qubo_sizes": [
+      {
+        "horizon": 8,
+        "lower_bound": 8,
+        "pruning": "none",
+        "makespan_encoding": "exp",
+        "start_variables": 72,
+        "aux_variables": 0,
+        "qubits": 72,
+        "fixed_operations": 0,
+        "quadratic_terms": 638,
+        "terms_by_kind": {
+          "onehot": 252,
+          "prec": 244,
+          "cap": 142
+        },
+        "subspace_dim": 134217728,
+        "penalty": 1.0,
+        "objective_bound_U": 0.0,
+        "max_abs": 2.0,
+        "min_abs": 1.0,
+        "dynamic_range": 2.0
+      },
+      {
+        "horizon": 8,
+        "lower_bound": 8,
+        "pruning": "horizon",
+        "makespan_encoding": "none",
+        "start_variables": 67,
+        "aux_variables": 0,
+        "qubits": 67,
+        "fixed_operations": 0,
+        "quadratic_terms": 556,
+        "terms_by_kind": {
+          "onehot": 217,
+          "prec": 209,
+          "cap": 130
+        },
+        "subspace_dim": 68841472,
+        "penalty": 1.0,
+        "objective_bound_U": 0.0,
+        "max_abs": 2.0,
+        "min_abs": 1.0,
+        "dynamic_range": 2.0
+      },
+      {
+        "horizon": 8,
+        "lower_bound": 8,
+        "pruning": "window",
+        "makespan_encoding": "none",
+        "start_variables": 39,
+        "aux_variables": 0,
+        "qubits": 39,
+        "fixed_operations": 0,
+        "quadratic_terms": 181,
+        "terms_by_kind": {
+          "onehot": 66,
+          "prec": 44,
+          "cap": 71
+        },
+        "subspace_dim": 512000,
+        "penalty": 1.0,
+        "objective_bound_U": 0.0,
+        "max_abs": 2.0,
+        "min_abs": 1.0,
+        "dynamic_range": 2.0
+      },
+      {
+        "horizon": 8,
+        "lower_bound": 8,
+        "pruning": "ac3",
+        "makespan_encoding": "none",
+        "start_variables": 39,
+        "aux_variables": 0,
+        "qubits": 39,
+        "fixed_operations": 0,
+        "quadratic_terms": 181,
+        "terms_by_kind": {
+          "onehot": 66,
+          "prec": 44,
+          "cap": 71
+        },
+        "subspace_dim": 512000,
+        "penalty": 1.0,
+        "objective_bound_U": 0.0,
+        "max_abs": 2.0,
+        "min_abs": 1.0,
+        "dynamic_range": 2.0
+      },
+      {
+        "horizon": 8,
+        "lower_bound": 8,
+        "pruning": "sac",
+        "makespan_encoding": "none",
+        "start_variables": 33,
+        "aux_variables": 0,
+        "qubits": 33,
+        "fixed_operations": 0,
+        "quadratic_terms": 123,
+        "terms_by_kind": {
+          "onehot": 46,
+          "prec": 30,
+          "cap": 47
+        },
+        "subspace_dim": 103680,
+        "penalty": 1.0,
+        "objective_bound_U": 0.0,
+        "max_abs": 2.0,
+        "min_abs": 1.0,
+        "dynamic_range": 2.0
+      }
+    ],
+    "formulation": {
+      "horizon": 8,
+      "lower_bound": 8,
+      "pruning": "sac",
+      "makespan_encoding": "none",
+      "start_variables": 33,
+      "aux_variables": 0,
+      "qubits": 33,
+      "fixed_operations": 0,
+      "quadratic_terms": 123,
+      "terms_by_kind": {
+        "onehot": 46,
+        "prec": 30,
+        "cap": 47
+      },
+      "subspace_dim": 103680,
+      "penalty": 1.0,
+      "objective_bound_U": 0.0,
+      "max_abs": 2.0,
+      "min_abs": 1.0,
+      "dynamic_range": 2.0
+    },
+    "domain_wall": {
+      "qubits": 24,
+      "wall_penalty": 10.0,
+      "quadratic_terms": 87,
+      "max_abs": 8.0,
+      "min_abs": 1.0,
+      "dynamic_range": 8.0
+    },
+    "certificate": {
+      "method": "one-hot subspace (103680 states) + penalty bound",
+      "ground_energy": 0.0,
+      "ground_states": 13,
+      "all_ground_states_optimal": true,
+      "penalty": 1.0,
+      "objective_bound_U": 0.0
+    },
+    "certificate_domain_wall": {
+      "method": "all 2^24 states",
+      "ground_energy": 0.0,
+      "ground_states": 13,
+      "all_ground_states_optimal": true
+    },
+    "permutation": {
+      "jobs": 3,
+      "permutations": 6,
+      "code_qubits": 3,
+      "aux_qubits": 0,
+      "qubits": 3,
+      "hubo_degree": 2,
+      "quadratic_terms": 2,
+      "invalid_code_penalty": 10.0,
+      "aux_penalties": [],
+      "cost_table_evaluations": 6,
+      "certificate": {
+        "method": "all 2^3 states",
+        "ground_energy": 8.0,
+        "ground_states": 4,
+        "all_ground_states_optimal": true
+      },
+      "qaoa": {
+        "solver": "QAOA X-mixer p=3",
+        "qubits": 3,
+        "samples": 4096,
+        "feasible_fraction": 0.996826,
+        "optimal_fraction": 0.994629,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 8.0,
+        "wall_time_s": 0.318,
+        "p": 3,
+        "p_optimal_exact": 0.9939219736659992,
+        "p_feasible_exact": 0.9964371251305004,
+        "uniform_p_optimal": 0.5,
+        "evaluations": 341,
+        "gammas": [
+          -0.330158,
+          0.234454,
+          0.945242
+        ],
+        "betas": [
+          1.136612,
+          -0.719933,
+          -0.240701
+        ],
+        "cvar_alpha": 1.0,
+        "simulated_dimension": 8
+      }
+    },
+    "qaoa": {
+      "solver": "XY-mixer QAOA p=4 (ring)",
+      "qubits": 33,
+      "samples": 4096,
+      "feasible_fraction": 0.172607,
+      "optimal_fraction": 0.172607,
+      "best_objective": 8.0,
+      "best_makespan": 8,
+      "best_energy": 0.0,
+      "wall_time_s": 123.96,
+      "p": 4,
+      "mixer": "ring",
+      "p_optimal_exact": 0.17198083720473462,
+      "p_feasible_exact": 0.17198083720473462,
+      "uniform_p_optimal": 0.0001253858024691358,
+      "evaluations": 517,
+      "gammas": [
+        -1.348613,
+        -2.4566,
+        -3.038676,
+        -3.666989
+      ],
+      "betas": [
+        0.408107,
+        0.318113,
+        0.256881,
+        0.165808
+      ],
+      "cvar_alpha": 1.0,
+      "simulated_dimension": 103680,
+      "full_hilbert_dimension": "2^33"
+    },
+    "qaoa_history": [
+      {
+        "p": 1,
+        "loss": 1.2004293263949999,
+        "expectation": 3.30118064758625,
+        "p_ground": 0.009887215421925518,
+        "p_feasible": 0.009887215421925518,
+        "evaluations": 66,
+        "seconds": 4.915081600000121,
+        "gammas": [
+          -2.2526709870902297
+        ],
+        "betas": [
+          0.29973370583545034
+        ]
+      },
+      {
+        "p": 2,
+        "loss": 0.8871004462452923,
+        "expectation": 2.4395262271745537,
+        "p_ground": 0.03537864249852294,
+        "p_feasible": 0.03537864249852294,
+        "evaluations": 166,
+        "seconds": 23.417964100000063,
+        "gammas": [
+          -1.626062659472622,
+          -3.2232628436866113
+        ],
+        "betas": [
+          0.35446238956632453,
+          0.21298400127079103
+        ]
+      },
+      {
+        "p": 3,
+        "loss": 0.701456749697175,
+        "expectation": 1.9290060616672315,
+        "p_ground": 0.08141140009993171,
+        "p_feasible": 0.08141140009993171,
+        "evaluations": 314,
+        "seconds": 60.40759200000002,
+        "gammas": [
+          -1.4365358574315656,
+          -2.6387004021617337,
+          -3.5651873801073157
+        ],
+        "betas": [
+          0.39117407305527263,
+          0.2795440537624642,
+          0.17850752118844576
+        ]
+      },
+      {
+        "p": 4,
+        "loss": 0.5561258120180419,
+        "expectation": 1.5293459830496157,
+        "p_ground": 0.17198083720473462,
+        "p_feasible": 0.17198083720473462,
+        "evaluations": 517,
+        "seconds": 123.83059120000007,
+        "gammas": [
+          -1.3486129826888373,
+          -2.4565996088481508,
+          -3.038675833777536,
+          -3.66698948472912
+        ],
+        "betas": [
+          0.4081074703937861,
+          0.31811340729131976,
+          0.2568811276113267,
+          0.16580841924276232
+        ]
+      }
+    ],
+    "cross_checks": [
+      {
+        "solver": "simulated annealing",
+        "qubits": 72,
+        "samples": 500,
+        "feasible_fraction": 0.396,
+        "optimal_fraction": 0.396,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 1.297,
+        "num_reads": 500,
+        "num_sweeps": 1000,
+        "formulation": "none"
+      },
+      {
+        "solver": "simulated annealing",
+        "qubits": 39,
+        "samples": 500,
+        "feasible_fraction": 0.916,
+        "optimal_fraction": 0.916,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 0.481,
+        "num_reads": 500,
+        "num_sweeps": 1000,
+        "formulation": "window"
+      },
+      {
+        "solver": "simulated annealing",
+        "qubits": 33,
+        "samples": 500,
+        "feasible_fraction": 0.966,
+        "optimal_fraction": 0.966,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 1.244,
+        "num_reads": 500,
+        "num_sweeps": 1000,
+        "formulation": "sac"
+      },
+      {
+        "solver": "simulated annealing",
+        "qubits": 24,
+        "samples": 500,
+        "feasible_fraction": 0.942,
+        "optimal_fraction": 0.942,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 0.224,
+        "num_reads": 500,
+        "num_sweeps": 1000,
+        "formulation": "domain-wall"
+      },
+      {
+        "solver": "simulated annealing",
+        "qubits": 3,
+        "samples": 500,
+        "feasible_fraction": 1.0,
+        "optimal_fraction": 1.0,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 8.0,
+        "wall_time_s": 0.017,
+        "num_reads": 500,
+        "num_sweeps": 1000,
+        "formulation": "permutation"
+      },
+      {
+        "solver": "tabu search",
+        "qubits": 33,
+        "samples": 50,
+        "feasible_fraction": 1.0,
+        "optimal_fraction": 1.0,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 1.052,
+        "num_reads": 50,
+        "timeout_ms": 20,
+        "formulation": "sac"
+      },
+      {
+        "solver": "VeloxQ (veloxq)",
+        "qubits": 72,
+        "samples": 1024,
+        "feasible_fraction": 0.170898,
+        "optimal_fraction": 0.128906,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 4.488,
+        "num_rep": 1024,
+        "num_steps": 5000,
+        "solver_time_s": 0.126251326,
+        "formulation": "none"
+      },
+      {
+        "solver": "VeloxQ (veloxq)",
+        "qubits": 39,
+        "samples": 1024,
+        "feasible_fraction": 0.930664,
+        "optimal_fraction": 0.930664,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 2.826,
+        "num_rep": 1024,
+        "num_steps": 5000,
+        "solver_time_s": 0.12679655,
+        "formulation": "window"
+      },
+      {
+        "solver": "VeloxQ (veloxq)",
+        "qubits": 33,
+        "samples": 1024,
+        "feasible_fraction": 0.985352,
+        "optimal_fraction": 0.985352,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 2.925,
+        "num_rep": 1024,
+        "num_steps": 5000,
+        "solver_time_s": 0.126022727,
+        "formulation": "sac"
+      },
+      {
+        "solver": "VeloxQ (veloxq)",
+        "qubits": 24,
+        "samples": 1024,
+        "feasible_fraction": 0.941406,
+        "optimal_fraction": 0.941406,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 0.0,
+        "wall_time_s": 2.356,
+        "num_rep": 1024,
+        "num_steps": 5000,
+        "solver_time_s": 0.122750772,
+        "formulation": "domain-wall"
+      },
+      {
+        "solver": "VeloxQ (veloxq)",
+        "qubits": 3,
+        "samples": 1024,
+        "feasible_fraction": 1.0,
+        "optimal_fraction": 1.0,
+        "best_objective": 8.0,
+        "best_makespan": 8,
+        "best_energy": 8.0,
+        "wall_time_s": 2.392,
+        "num_rep": 1024,
+        "num_steps": 5000,
+        "solver_time_s": 0.123984051,
+        "formulation": "permutation"
+      }
+    ],
+    "schedule": {
+      "instance": "instance_3x3",
+      "method": "XY-mixer QAOA p=4 (exact one-hot-subspace state-vector simulation), 33-qubit time-indexed QUBO, H=8",
+      "makespan": 8,
+      "schedule": [
+        {
+          "job": "Z2",
+          "machine": "T",
+          "start": 0,
+          "end": 1
+        },
+        {
+          "job": "Z2",
+          "machine": "F",
+          "start": 1,
+          "end": 3
+        },
+        {
+          "job": "Z3",
+          "machine": "T",
+          "start": 1,
+          "end": 3
+        },
+        {
+          "job": "Z3",
+          "machine": "F",
+          "start": 3,
+          "end": 5
+        },
+        {
+          "job": "Z2",
+          "machine": "S",
+          "start": 3,
+          "end": 4
+        },
+        {
+          "job": "Z1",
+          "machine": "T",
+          "start": 3,
+          "end": 5
+        },
+        {
+          "job": "Z1",
+          "machine": "F",
+          "start": 5,
+          "end": 6
+        },
+        {
+          "job": "Z3",
+          "machine": "S",
+          "start": 5,
+          "end": 6
+        },
+        {
+          "job": "Z1",
+          "machine": "S",
+          "start": 6,
+          "end": 8
+        }
+      ]
+    }
+  }
+}

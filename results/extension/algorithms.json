@@ -1,0 +1,708 @@
+{
+  "H": 9,
+  "reference": 21.0,
+  "qubits": {
+    "none": 102,
+    "window": 62,
+    "sac": 35,
+    "dw": 24
+  },
+  "qaoa": [
+    {
+      "variant": "XY-ring",
+      "history": [
+        {
+          "p": 1,
+          "loss": 1.1677070381373205,
+          "expectation": 64.51581385708698,
+          "p_ground": 0.007519172187671014,
+          "p_feasible": 0.053284100145529575,
+          "evaluations": 68,
+          "seconds": 23.30553300000065,
+          "gammas": [
+            -2.5547593308944
+          ],
+          "betas": [
+            0.36495838383193496
+          ]
+        },
+        {
+          "p": 2,
+          "loss": 0.804178301541058,
+          "expectation": 44.43085116014346,
+          "p_ground": 0.027695223290380835,
+          "p_feasible": 0.16763962524044873,
+          "evaluations": 150,
+          "seconds": 100.04327139999987,
+          "gammas": [
+            -1.822137206991254,
+            -3.6018410294361516
+          ],
+          "betas": [
+            0.46792715837819226,
+            0.28135239187695726
+          ]
+        },
+        {
+          "p": 3,
+          "loss": 0.607699163560126,
+          "expectation": 33.57537878669695,
+          "p_ground": 0.04503370322982314,
+          "p_feasible": 0.2852225288002913,
+          "evaluations": 283,
+          "seconds": 290.1921438999998,
+          "gammas": [
+            1.4340113503219232,
+            2.7512992927840934,
+            4.034984894433998
+          ],
+          "betas": [
+            -0.4834717190672624,
+            -0.3606650965533484,
+            -0.20804487000702945
+          ]
+        },
+        {
+          "p": 4,
+          "loss": 0.4978781554789836,
+          "expectation": 27.50776809021383,
+          "p_ground": 0.05621626030396522,
+          "p_feasible": 0.40257829188759653,
+          "evaluations": 496,
+          "seconds": 625.1934786000002,
+          "gammas": [
+            1.2054760768194646,
+            2.3872977840683367,
+            3.3743618808593734,
+            4.4385116779997125
+          ],
+          "betas": [
+            -0.5086376528796818,
+            -0.4023391964546449,
+            -0.2926024251662541,
+            -0.16806431866377505
+          ]
+        },
+        {
+          "p": 5,
+          "loss": 0.4085841738355994,
+          "expectation": 22.57427560441686,
+          "p_ground": 0.060069861324514695,
+          "p_feasible": 0.5179866584640662,
+          "evaluations": 750,
+          "seconds": 1108.3228512999995,
+          "gammas": [
+            0.9327883150973317,
+            1.9115816056917763,
+            2.772147274182328,
+            3.547499440279502,
+            4.509808500979487
+          ],
+          "betas": [
+            -0.5780519247628648,
+            -0.44987505329020117,
+            -0.34529578303264663,
+            -0.26612678899769543,
+            -0.16057637065577413
+          ]
+        }
+      ],
+      "summary": {
+        "solver": "XY-mixer QAOA p=5 (ring)",
+        "qubits": 35,
+        "samples": 4096,
+        "feasible_fraction": 0.515869,
+        "optimal_fraction": 0.062744,
+        "best_objective": 21.0,
+        "best_makespan": 9,
+        "best_energy": 7.0,
+        "wall_time_s": 1109.06,
+        "p": 5,
+        "mixer": "ring",
+        "p_optimal_exact": 0.060069861324514695,
+        "p_feasible_exact": 0.5179866584640662,
+        "uniform_p_optimal": 8.138020833333333e-05,
+        "evaluations": 750,
+        "gammas": [
+          0.932788,
+          1.911582,
+          2.772147,
+          3.547499,
+          4.509809
+        ],
+        "betas": [
+          -0.578052,
+          -0.449875,
+          -0.345296,
+          -0.266127,
+          -0.160576
+        ],
+        "cvar_alpha": 1.0,
+        "simulated_dimension": 331776,
+        "full_hilbert_dimension": "2^35"
+      }
+    },
+    {
+      "variant": "XY-clique",
+      "history": [
+        {
+          "p": 1,
+          "loss": 1.2384202985529857,
+          "expectation": 68.42272149505247,
+          "p_ground": 0.004692808349980623,
+          "p_feasible": 0.04587719411131303,
+          "evaluations": 57,
+          "seconds": 18.528800600000977,
+          "gammas": [
+            -2.562503936541102
+          ],
+          "betas": [
+            0.273293011430226
+          ]
+        },
+        {
+          "p": 2,
+          "loss": 0.9182143855120054,
+          "expectation": 50.7313447995383,
+          "p_ground": 0.013070468765396984,
+          "p_feasible": 0.12465550846064562,
+          "evaluations": 152,
+          "seconds": 92.60071570000036,
+          "gammas": [
+            -1.7190159894632924,
+            -3.3095564993913227
+          ],
+          "betas": [
+            0.3626043952869071,
+            0.21399904055243424
+          ]
+        },
+        {
+          "p": 3,
+          "loss": 0.718849854690655,
+          "expectation": 39.71645447165867,
+          "p_ground": 0.033851574018643346,
+          "p_feasible": 0.21938405748284212,
+          "evaluations": 307,
+          "seconds": 273.22799120000127,
+          "gammas": [
+            -1.3804701480577202,
+            -2.39546734021343,
+            -3.75602242777224
+          ],
+          "betas": [
+            0.39264738432065543,
+            0.27784098347516945,
+            0.16373733313898625
+          ]
+        },
+        {
+          "p": 4,
+          "loss": 0.5730758336684271,
+          "expectation": 31.662439810180597,
+          "p_ground": 0.060847693406054476,
+          "p_feasible": 0.33529592136830844,
+          "evaluations": 511,
+          "seconds": 588.1064907,
+          "gammas": [
+            -1.141468937633771,
+            -1.9154953707838884,
+            -2.6733932781682594,
+            -3.851728938171544
+          ],
+          "betas": [
+            0.443450175083126,
+            0.3386214281856045,
+            0.23845578853199864,
+            0.14663640729962582
+          ]
+        }
+      ],
+      "summary": {
+        "solver": "XY-mixer QAOA p=4 (clique)",
+        "qubits": 35,
+        "samples": 4096,
+        "feasible_fraction": 0.340576,
+        "optimal_fraction": 0.0625,
+        "best_objective": 21.0,
+        "best_makespan": 9,
+        "best_energy": 7.0,
+        "wall_time_s": 588.684,
+        "p": 4,
+        "mixer": "clique",
+        "p_optimal_exact": 0.060847693406054476,
+        "p_feasible_exact": 0.33529592136830844,
+        "uniform_p_optimal": 8.138020833333333e-05,
+        "evaluations": 511,
+        "gammas": [
+          -1.141469,
+          -1.915495,
+          -2.673393,
+          -3.851729
+        ],
+        "betas": [
+          0.44345,
+          0.338621,
+          0.238456,
+          0.146636
+        ],
+        "cvar_alpha": 1.0,
+        "simulated_dimension": 331776,
+        "full_hilbert_dimension": "2^35"
+      }
+    },
+    {
+      "variant": "XY-ring, CVaR 0.1",
+      "history": [
+        {
+          "p": 1,
+          "loss": 0.34675362599993587,
+          "expectation": 66.58727351701394,
+          "p_ground": 0.008635349780120361,
+          "p_feasible": 0.05816844909884203,
+          "evaluations": 83,
+          "seconds": 30.19556079999893,
+          "gammas": [
+            -3.0621896755538986
+          ],
+          "betas": [
+            0.3931373217280723
+          ]
+        },
+        {
+          "p": 2,
+          "loss": 0.16217007354475052,
+          "expectation": 45.22138360693302,
+          "p_ground": 0.02746997590319213,
+          "p_feasible": 0.18007484141147598,
+          "evaluations": 189,
+          "seconds": 113.50799509999888,
+          "gammas": [
+            -2.0678374700580986,
+            -3.958995332285151
+          ],
+          "betas": [
+            0.47767536018572687,
+            0.2918886773679586
+          ]
+        },
+        {
+          "p": 3,
+          "loss": 0.14430806767949916,
+          "expectation": 40.52653376944617,
+          "p_ground": 0.0513489630353837,
+          "p_feasible": 0.24887561047692963,
+          "evaluations": 372,
+          "seconds": 328.85687169999983,
+          "gammas": [
+            -1.8682639990291576,
+            1.5000266907985917,
+            5.23944587832468
+          ],
+          "betas": [
+            0.6824056841716132,
+            -0.4273635373201916,
+            -0.23482102094448404
+          ]
+        },
+        {
+          "p": 4,
+          "loss": 0.1272994685577126,
+          "expectation": 32.82371684231828,
+          "p_ground": 0.09833521810931875,
+          "p_feasible": 0.3711714448579728,
+          "evaluations": 626,
+          "seconds": 723.4530998999999,
+          "gammas": [
+            -1.6186230795973757,
+            -3.6195946752148607,
+            5.664257269696251,
+            5.011782309032299
+          ],
+          "betas": [
+            0.6058107214772873,
+            0.17358800072022296,
+            -0.32520064444188196,
+            -0.1987150632555663
+          ]
+        }
+      ],
+      "summary": {
+        "solver": "XY-mixer QAOA p=4 (ring)",
+        "qubits": 35,
+        "samples": 4096,
+        "feasible_fraction": 0.375244,
+        "optimal_fraction": 0.109131,
+        "best_objective": 21.0,
+        "best_makespan": 9,
+        "best_energy": 7.0,
+        "wall_time_s": 724.109,
+        "p": 4,
+        "mixer": "ring",
+        "p_optimal_exact": 0.09833521810931875,
+        "p_feasible_exact": 0.3711714448579728,
+        "uniform_p_optimal": 8.138020833333333e-05,
+        "evaluations": 626,
+        "gammas": [
+          -1.618623,
+          -3.619595,
+          5.664257,
+          5.011782
+        ],
+        "betas": [
+          0.605811,
+          0.173588,
+          -0.325201,
+          -0.198715
+        ],
+        "cvar_alpha": 0.1,
+        "simulated_dimension": 331776,
+        "full_hilbert_dimension": "2^35"
+      }
+    },
+    {
+      "variant": "XY-parity",
+      "history": [
+        {
+          "p": 1,
+          "loss": 1.1796736769164495,
+          "expectation": 65.17697064963383,
+          "p_ground": 0.007192770339316338,
+          "p_feasible": 0.0500052321733791,
+          "evaluations": 192,
+          "seconds": 23.599804999999833,
+          "gammas": [
+            -2.5416183096148535
+          ],
+          "betas": [
+            0.3618228927897498
+          ]
+        },
+        {
+          "p": 2,
+          "loss": 0.8287190217113447,
+          "expectation": 45.7867259495518,
+          "p_ground": 0.026844610442261278,
+          "p_feasible": 0.15181697547974224,
+          "evaluations": 667,
+          "seconds": 135.0208629000008,
+          "gammas": [
+            -1.8190998452406777,
+            -3.662027797298549
+          ],
+          "betas": [
+            0.46100231790668994,
+            0.27886510886610655
+          ]
+        }
+      ],
+      "summary": {
+        "solver": "XY-mixer QAOA p=2 (parity)",
+        "qubits": 35,
+        "samples": 4096,
+        "feasible_fraction": 0.152832,
+        "optimal_fraction": 0.031982,
+        "best_objective": 21.0,
+        "best_makespan": 9,
+        "best_energy": 7.0,
+        "wall_time_s": 135.455,
+        "p": 2,
+        "mixer": "parity",
+        "p_optimal_exact": 0.026844610442261278,
+        "p_feasible_exact": 0.15181697547974224,
+        "uniform_p_optimal": 8.138020833333333e-05,
+        "evaluations": 667,
+        "gammas": [
+          -1.8191,
+          -3.662028
+        ],
+        "betas": [
+          0.461002,
+          0.278865
+        ],
+        "cvar_alpha": 1.0,
+        "simulated_dimension": 331776,
+        "full_hilbert_dimension": "2^35"
+      }
+    }
+  ],
+  "parameter_transfer": {
+    "p": 3,
+    "angles_from": "instance_3x3 (XY-ring)",
+    "p_optimal_transferred": 0.04162853468021085,
+    "p_optimal_own_optimisation": 0.04503370322982314,
+    "uniform": 8.138020833333333e-05
+  },
+  "samplers": [
+    {
+      "solver": "sa",
+      "qubits": 102,
+      "seeds": 10,
+      "p_success_mean": 0.07800000000000001,
+      "p_success_ci95": [
+        0.068975,
+        0.08800000000000001
+      ],
+      "p_feasible_mean": 0.256,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.004342424999995273,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.49428292000029617,
+      "tts99_samples": 56.70689623171479,
+      "tts99_seconds": 0.2462454438687361,
+      "formulation": "naive"
+    },
+    {
+      "solver": "tabu",
+      "qubits": 102,
+      "seeds": 10,
+      "p_success_mean": 0.19,
+      "p_success_ci95": [
+        0.13,
+        0.25000000000000006
+      ],
+      "p_feasible_mean": 0.51,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 9,
+      "seconds_per_sample": 0.022540830000070854,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.22077515000000858,
+      "tts99_samples": 21.854345326782838,
+      "tts99_seconds": 0.49261508277385485,
+      "formulation": "naive"
+    },
+    {
+      "solver": "sa",
+      "qubits": 62,
+      "seeds": 10,
+      "p_success_mean": 0.32699999999999996,
+      "p_success_ci95": [
+        0.30300000000000005,
+        0.351
+      ],
+      "p_feasible_mean": 0.8320000000000001,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.002098876999989443,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.24151965999972164,
+      "tts99_samples": 11.628925469406287,
+      "tts99_seconds": 0.024407684202328295,
+      "formulation": "window"
+    },
+    {
+      "solver": "tabu",
+      "qubits": 62,
+      "seeds": 10,
+      "p_success_mean": 1.0,
+      "p_success_ci95": [
+        1.0,
+        1.0
+      ],
+      "p_feasible_mean": 1.0,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.02134038000003784,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.21328224999979284,
+      "tts99_samples": 1.0,
+      "tts99_seconds": 0.02134038000003784,
+      "formulation": "window"
+    },
+    {
+      "solver": "sa",
+      "qubits": 35,
+      "seeds": 10,
+      "p_success_mean": 0.42700000000000005,
+      "p_success_ci95": [
+        0.39699999999999996,
+        0.4589999999999999
+      ],
+      "p_feasible_mean": 0.999,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.0010890759999892907,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.10838788000000932,
+      "tts99_samples": 8.269746630139538,
+      "tts99_seconds": 0.009006382580877284,
+      "formulation": "SAC"
+    },
+    {
+      "solver": "tabu",
+      "qubits": 35,
+      "seeds": 10,
+      "p_success_mean": 1.0,
+      "p_success_ci95": [
+        1.0,
+        1.0
+      ],
+      "p_feasible_mean": 1.0,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.021126350000122328,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.21211795000017447,
+      "tts99_samples": 1.0,
+      "tts99_seconds": 0.021126350000122328,
+      "formulation": "SAC"
+    },
+    {
+      "solver": "sa",
+      "qubits": 24,
+      "seeds": 10,
+      "p_success_mean": 0.8270000000000002,
+      "p_success_ci95": [
+        0.8039999999999999,
+        0.8479999999999999
+      ],
+      "p_feasible_mean": 1.0,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.000650789999999688,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.07240645999972913,
+      "tts99_samples": 2.6248307256023717,
+      "tts99_seconds": 0.0017082135879139485,
+      "formulation": "SAC+DW"
+    },
+    {
+      "solver": "tabu",
+      "qubits": 24,
+      "seeds": 10,
+      "p_success_mean": 1.0,
+      "p_success_ci95": [
+        1.0,
+        1.0
+      ],
+      "p_feasible_mean": 1.0,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 10,
+      "seconds_per_sample": 0.02109548000007635,
+      "time_basis": "wall clock",
+      "wall_seconds_per_run": 0.2118757899997945,
+      "tts99_samples": 1.0,
+      "tts99_seconds": 0.02109548000007635,
+      "formulation": "SAC+DW"
+    },
+    {
+      "solver": "veloxq",
+      "qubits": 102,
+      "seeds": 3,
+      "p_success_mean": 0.043294270833333336,
+      "p_success_ci95": [
+        0.041015625,
+        0.0458984375
+      ],
+      "p_feasible_mean": 0.09928385416666667,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 3,
+      "seconds_per_sample": 0.0001206558505859375,
+      "time_basis": "solver-reported",
+      "wall_seconds_per_run": 6.882609800000258,
+      "tts99_samples": 104.04947397278723,
+      "tts99_seconds": 0.01255417778520601,
+      "formulation": "naive"
+    },
+    {
+      "solver": "veloxq",
+      "qubits": 62,
+      "seeds": 3,
+      "p_success_mean": 0.4671223958333333,
+      "p_success_ci95": [
+        0.4521484375,
+        0.4794921875
+      ],
+      "p_feasible_mean": 0.7581380208333334,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 3,
+      "seconds_per_sample": 0.00011802080078125,
+      "time_basis": "solver-reported",
+      "wall_seconds_per_run": 6.725879366666656,
+      "tts99_samples": 7.316023982921044,
+      "tts99_seconds": 0.0008634430089991716,
+      "formulation": "window"
+    },
+    {
+      "solver": "veloxq",
+      "qubits": 35,
+      "seeds": 3,
+      "p_success_mean": 0.6897786458333334,
+      "p_success_ci95": [
+        0.6787109375,
+        0.7060546875
+      ],
+      "p_feasible_mean": 0.986328125,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 3,
+      "seconds_per_sample": 0.000118722724609375,
+      "time_basis": "solver-reported",
+      "wall_seconds_per_run": 6.3824857333335485,
+      "tts99_samples": 3.9344651041817205,
+      "tts99_seconds": 0.00046711041704896233,
+      "formulation": "SAC"
+    },
+    {
+      "solver": "veloxq",
+      "qubits": 24,
+      "seeds": 3,
+      "p_success_mean": 0.7783203125,
+      "p_success_ci95": [
+        0.7724609375,
+        0.783203125
+      ],
+      "p_feasible_mean": 0.9977213541666666,
+      "best_objective_min": 21.0,
+      "runs_hitting_optimum": 3,
+      "seconds_per_sample": 0.0001131456708984375,
+      "time_basis": "solver-reported",
+      "wall_seconds_per_run": 5.013747833333279,
+      "tts99_samples": 3.0568228234792922,
+      "tts99_seconds": 0.0003458662691802205,
+      "formulation": "SAC+DW"
+    }
+  ],
+  "penalty_sweep": [
+    {
+      "penalty_scale": 0.25,
+      "penalty": 4.25,
+      "ground_state_optimal": true,
+      "sa_p_success": 0.292,
+      "qaoa_p2_p_optimal": 0.05996533142572995,
+      "qaoa_p2_p_feasible": 0.15951403065949726
+    },
+    {
+      "penalty_scale": 0.5,
+      "penalty": 8.5,
+      "ground_state_optimal": true,
+      "sa_p_success": 0.612,
+      "qaoa_p2_p_optimal": 0.04387677216866425,
+      "qaoa_p2_p_feasible": 0.16929174058491503
+    },
+    {
+      "penalty_scale": 1.0,
+      "penalty": 17.0,
+      "ground_state_optimal": true,
+      "sa_p_success": 0.43,
+      "qaoa_p2_p_optimal": 0.035192261565627915,
+      "qaoa_p2_p_feasible": 0.1676396815467323
+    },
+    {
+      "penalty_scale": 2.0,
+      "penalty": 34.0,
+      "ground_state_optimal": true,
+      "sa_p_success": 0.28600000000000003,
+      "qaoa_p2_p_optimal": 0.031070043253277193,
+      "qaoa_p2_p_feasible": 0.16445538488587552
+    },
+    {
+      "penalty_scale": 4.0,
+      "penalty": 68.0,
+      "ground_state_optimal": true,
+      "sa_p_success": 0.26,
+      "qaoa_p2_p_optimal": 0.029101779670826288,
+      "qaoa_p2_p_feasible": 0.16220987777610374
+    }
+  ]
+}

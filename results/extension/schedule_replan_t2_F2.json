@@ -1,0 +1,73 @@
+{
+  "instance": "metaltech_monday_replan_t2_F2",
+  "method": "",
+  "makespan": 11,
+  "schedule": [
+    {
+      "job": "Z3",
+      "machine": "T",
+      "start": 2,
+      "end": 4,
+      "operation": 0
+    },
+    {
+      "job": "Z3",
+      "machine": "F",
+      "start": 4,
+      "end": 6,
+      "operation": 1
+    },
+    {
+      "job": "Z1",
+      "machine": "T",
+      "start": 4,
+      "end": 6,
+      "operation": 0
+    },
+    {
+      "job": "Z1",
+      "machine": "F",
+      "start": 6,
+      "end": 7,
+      "operation": 1
+    },
+    {
+      "job": "Z3",
+      "machine": "S",
+      "start": 6,
+      "end": 7,
+      "operation": 2
+    },
+    {
+      "job": "Z1",
+      "machine": "S",
+      "start": 7,
+      "end": 9,
+      "operation": 2
+    },
+    {
+      "job": "Z2",
+      "machine": "F",
+      "start": 8,
+      "end": 10,
+      "operation": 0
+    },
+    {
+      "job": "Z2",
+      "machine": "S",
+      "start": 10,
+      "end": 11,
+      "operation": 1
+    }
+  ],
+  "fixed": [],
+  "objective": {
+    "weights": {
+      "makespan": 2.0,
+      "weighted_tardiness": 1.0
+    },
+    "makespan": 11,
+    "weighted_tardiness": 11.0,
+    "value": 33.0
+  }
+}
