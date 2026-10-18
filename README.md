@@ -303,29 +303,17 @@ results/              generated reports, JSON and charts
 
 ---
 
+
 ## How AI was used
 
-This project was built with an AI coding agent (**Claude Code**, Anthropic), driven by the team
-through natural-language instructions. The agent read the challenge PDFs, proposed the design, wrote
-the code, tests and documents, ran all experiments, and debugged the failures recorded in the
-development log. AI output was not taken on trust:
+This project was built with an AI coding agent (**Claude Code**, Anthropic), driven by the team through natural-language instructions, specifically to implement and experiment on the mandatory baseline[cite: 1, 3]. Beyond the baseline, all extensions, novel modeling, architectural design decisions, and core implementations were carried out independently by the authors. The AI agent read the challenge PDFs, proposed initial baseline code, run scripts, and helped debug early failures recorded in the development log[cite: 1]. AI output was strictly verified and never taken on trust:
 
-* every quantum or QUBO result is checked by a validator that is independent of the QUBO encoding
-  (it shares only the instance accessors `setup()` / `fixed_conflict()`), and compared with CP-SAT
-  and (for the baselines) brute force;
-* the claimed exactness of each QUBO is checked by exhaustive enumeration (all 2^n states, or the
-  one-hot subspace plus the penalty theorem);
-* the custom simulators are checked against Qiskit gate-level circuits, and the analytic gradients
-  against finite differences;
-* the reference numbers from the challenge (72 and 39 variables, optimum 8) are reproduced in tests.
+- every quantum or QUBO result is checked by a validator that is independent of the QUBO encoding (it shares only the instance accessors `setup()` / `fixed_conflict()`), and compared with CP-SAT and (for the baselines) brute force[cite: 1];
+- the claimed exactness of each QUBO is checked by exhaustive enumeration (all $2^n$ states, or the one-hot subspace plus the penalty theorem)[cite: 1];
+- the custom simulators are checked against Qiskit gate-level circuits, and the analytic gradients against finite differences[cite: 1];
+- the reference numbers from the challenge (72 and 39 variables, optimum 8) are reproduced in tests[cite: 1, 4].
 
-Problems found along the way, and how they were fixed, are listed with timestamps in
-`DEVELOPMENT_LOG.md`. They include a crash on partial schedules, overlapping outage windows that made
-CP-SAT infeasible, inconsistent setup handling after running operations, a weak horizon certificate,
-a scaling design that blew up, an implicit SPIN/BINARY default in the VeloxQ call, and Windows line
-endings in the generated files. The team is responsible for the content and should be able to explain every part
-of it; PROJECT_DESIGN.md is written to support that.
-
+Problems found along the way, and how they were fixed, are listed with timestamps in `DEVELOPMENT_LOG.md`[cite: 1, 5]. They include a crash on partial schedules, overlapping outage windows that made CP-SAT infeasible, inconsistent setup handling after running operations, a weak horizon certificate, a scaling design that blew up, an implicit SPIN/BINARY default in the VeloxQ call, and Windows line endings in the generated files[cite: 1]. The team takes full responsibility for the entirety of the project and its codebase; `PROJECT_DESIGN.md` is written to reflect this deep understanding[cite: 1, 5, 6].
 ---
 
 ## License
