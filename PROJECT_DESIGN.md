@@ -366,7 +366,7 @@ large-neighbourhood search whose every step is a small *exact* QUBO:
 * **Not a proof.** The search finds good plans, not certificates. Optimality is judged against CP-SAT
   with the same horizon. The search stops early when it reaches that value, only to save calls.
 
-### 6.6 Instance B on 4 qubits: Pauli correlation encoding (`erpq/solvers/pce.py`)
+### 6.6 The baseline instances on 2 and 4 qubits: Pauli correlation encoding (`erpq/solvers/pce.py`)
 A QUBO whose qubits hold the start times cannot get near 4 qubits. After SAC, instance B still has
 103,680 start-time combinations, and telling them apart takes at least $\lceil\log_2 103{,}680\rceil = 17$
 bits. Only 13 of them are feasible, which 4 bits could number, but listing them means solving the
@@ -374,32 +374,41 @@ problem first. Fewer qubits therefore need a different way of holding the variab
 * the job order only, with brute-force coefficients (Sec. 5.6, 3 qubits);
 * or the correlators of a small state, which is this section.
 
-The certified 24-variable domain-wall QUBO (Sec. 5.5) is solved on 4 qubits with Pauli correlation
-encoding (PCE; Sciorilli et al., arXiv:2401.09421). The QUBO is unchanged; only the way a quantum state
-holds its variables changes.
+The certified domain-wall QUBOs (Sec. 5.5) of both baseline instances are solved with Pauli
+correlation encoding (PCE; Sciorilli et al., arXiv:2401.09421) on the fewest qubits the encoding allows:
+instance B's 24 variables on 4 qubits, instance A's 8 on 2. The QUBOs are unchanged; only the way a
+quantum state holds their variables changes.
 
-* **Encoding.** Variable $i$ is the sign of $\langle\Pi_i\rangle$ on one 4-qubit state,
+* **Encoding.** Variable $i$ is the sign of $\langle\Pi_i\rangle$ on one $n$-qubit state,
   $x_i = (1 - \mathrm{sgn}\langle\Pi_i\rangle)/2$. The $\Pi_i$ are the weight-2 and weight-1 Pauli
-  strings of the families $Z\cdots Z$, $X\cdots X$ and $Y\cdots Y$, $3\,(\binom{4}{2} + 4) = 30 \ge 24$ of
-  them. Strings of one family commute, so one evaluation needs 3 measurement settings. With 3 qubits,
-  these families have only $3 \cdot 7 = 21 < 24$ strings.
-* **Training.** Hardware-efficient ansatz: RY, RZ on every qubit, then 4 x (CNOT ring, RY, RZ), 40 angles.
-  The loss is the paper's relaxation of the Ising energy,
+  strings of the families $Z\cdots Z$, $X\cdots X$ and $Y\cdots Y$, $3\,(\binom{n}{2} + n)$ of them:
+  $30 \ge 24$ for $n = 4$ and $9 \ge 8$ for $n = 2$ (`min_qubits`). Strings of one family commute, so one
+  evaluation needs 3 measurement settings. Fewer qubits are not possible with these families: 3 qubits
+  have only $3 \cdot 7 = 21 < 24$ strings, 1 qubit only $3 < 8$.
+* **Training.** Hardware-efficient ansatz: RY, RZ on every qubit, then 4 x (CNOT ring, RY, RZ), 40 angles
+  on 4 qubits and 20 on 2. The loss is the paper's relaxation of the Ising energy,
   $L = c + \sum_i h_i t_i + \sum_{i<j} J_{ij} t_i t_j + \beta\nu\big(\tfrac{1}{m}\sum_i t_i^2\big)^2$ with
-  $t_i = \tanh(\alpha\langle\Pi_i\rangle)$. As in the paper, $\alpha = n^{\lfloor k/2 \rfloor} = 4$ and
-  $\beta = 1/2$; $\nu = (\sum|h| + \sum|J|)/2$ takes the place of its MaxCut bound. L-BFGS-B uses exact
-  parameter-shift gradients, over independent random restarts.
+  $t_i = \tanh(\alpha\langle\Pi_i\rangle)$. As in the paper, $\alpha = n^{\lfloor k/2 \rfloor} = n$ (4 for
+  instance B, 2 for instance A) and $\beta = 1/2$; $\nu = (\sum|h| + \sum|J|)/2$ takes the place of its
+  MaxCut bound. L-BFGS-B uses exact parameter-shift gradients, over independent random restarts. The
+  protocol is the same for both instances.
 * **Read-out and checks.** Signs give bits. The bits are decoded through the domain wall, checked by the
-  validator and compared with CP-SAT. The correlators are cross-checked against a Qiskit gate-level
-  circuit, and the read-out is repeated from shots in the 3 settings.
-* **Result** (`results/extension/pce.md`, 100 restarts). Optimal schedule in 19% of the restarts, and
-  44% after the paper's single bit-swap pass (classical post-processing); 22 restarts give 99%.
+  validator and compared with CP-SAT. Both QUBOs are certified by enumerating all $2^m$ states. The
+  correlators are cross-checked against a Qiskit gate-level circuit, and the read-out is repeated from
+  shots in the 3 settings.
+* **Result** (`results/extension/pce.md`, 100 restarts per instance).
+  - Instance B: optimal schedule in 19% of the restarts, and 44% after the paper's single bit-swap pass
+    (classical post-processing); 22 restarts give 99%.
+  - Instance A: no optimal schedule in any restart. 73 end at a makespan-5 plan and 27 at infeasible
+    strings, and the bit-swap pass does not repair them. The 2-qubit state can hold the optimum: the
+    untrained circuit produces its sign pattern for 0.12% of random angle vectors. The training on the
+    relaxed loss settles elsewhere.
 * **What it is not.**
-  - A certificate: PCE is a variational heuristic, and certification stays with the 24-variable QUBO.
-  - 24 independent qubits: the 4 qubits hold 24 correlators.
-  - An advantage: a 4-qubit circuit is classically simulable. The same loss over 24 free parameters,
-    with no quantum state, also reaches 19%, and SA reaches 95% per read. Part 7 shows the qubit count,
-    nothing more.
+  - A certificate: PCE is a variational heuristic, and certification stays with the enumerated QUBOs.
+  - Independent qubits: 4 qubits hold 24 correlators, 2 qubits hold 8.
+  - An advantage: circuits this small are classically simulable. The same loss with no quantum state
+    reaches 19% on instance B, as much as PCE, and 13% on instance A, where PCE reaches 0%. SA reaches 95%
+    (B) and 88% (A) per read. Part 7 shows the qubit count, nothing more.
 
 ---
 
@@ -447,7 +456,7 @@ directions on *this* model:
 | `erpq/solvers/qaoa.py` | X-mixer and XY-mixer QAOA simulators, adjoint gradients, optimiser |
 | `erpq/solvers/qiskit_check.py` | gate-level Qiskit circuits for cross-checking |
 | `erpq/solvers/samplers.py` | SA, tabu, exhaustive, VeloxQ |
-| `erpq/solvers/pce.py` | Pauli correlation encoding: a QUBO with m variables on n qubits (instance B: 24 on 4) |
+| `erpq/solvers/pce.py` | Pauli correlation encoding: a QUBO with m variables on the fewest qubits n (instance A: 8 on 2, instance B: 24 on 4) |
 | `erpq/rolling.py` | residual problem after a breakdown, right-shift repair |
 | `erpq/decompose.py` | decomposition of large order books: neighbourhood sub-QUBOs, block-diagonal batching, search loop |
 | `erpq/generator.py` | random extended instances |

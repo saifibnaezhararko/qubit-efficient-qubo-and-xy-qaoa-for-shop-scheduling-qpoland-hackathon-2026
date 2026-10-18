@@ -144,14 +144,28 @@ encoding (PCE; Sciorilli et al., arXiv:2401.09421).
 * Variable i = sign of <P_i> on one 4-qubit state. The P_i are weight-2/1 strings of the Z..Z / X..X /
   Y..Y families (30 >= 24), so 3 measurement settings suffice. No brute-force coefficients.
 * 40-angle hardware-efficient ansatz, the paper's loss with alpha = 4, beta = 1/2, nu = 45.125,
-  L-BFGS-B with parameter-shift gradients, 100 restarts (seed 7), 90 s.
+  L-BFGS-B with parameter-shift gradients, 100 restarts (seed 7), 90-100 s.
 * Optimal read-out in **19%** of restarts (44% after one bit-swap pass; 22 restarts for 99%; uniform
   7.7e-7). Qiskit agrees to 5.0e-16; 4096 shots x 3 settings reproduce the read-out (smallest margin
-  0.028 = 1.8 sigma of shot noise).
+  0.028 = 1.8 sigma of shot noise). The untrained circuit (100,000 random angle vectors) never reads out
+  an optimal or even feasible string.
 * Always say: a variational heuristic, not a certificate; the same loss without a quantum state (24 free
   parameters) also gives 19%; SA on the 24 qubits gives 95%. Why no 4-qubit time-indexed QUBO: after SAC
   103,680 start-time combinations remain (>= 17 bits); the 13 feasible ones fit in 4 bits only after
   solving.
+
+**Instance A on 2 qubits (Part 7, same run and protocol, added 2026-10-18):** the certified 8-variable
+domain-wall QUBO (H = 5, 18 couplings; all 2^8 states enumerated: 1 ground state = the makespan-4
+optimum). DEVELOPMENT_LOG.md has no entry for it: the user asked that the log stay unchanged.
+* 2 qubits hold 3 x (1 + 2) = 9 >= 8 strings (ZZ, XX, YY, IZ, ZI, IX, XI, IY), the fewest possible.
+  20-angle ansatz, alpha = 2 (= n), beta = 1/2, nu = 12, 100 restarts (seed 7), 4 s.
+* **No optimal read-out in 100 restarts**: 73 feasible at makespan 5, 27 infeasible; the bit-swap pass
+  leaves all of them (uniform: 3.9e-3).
+* The optimum is representable: the untrained circuit produces its sign pattern for 0.12% of 100,000
+  random angle vectors (`tests/test_pce.py` checks that it occurs). Same loss without a quantum state: 13%;
+  SA: 88%. Qiskit agrees to 5.8e-16 on the shown read-out (restart 41, makespan 5); 4096 shots reproduce it.
+* Always say: a negative result for PCE, reported as such. Instance A's deliverable stays the 12-qubit
+  X-mixer QAOA.
 
 **Stage 2 (`metaltech_monday`)**
 * Qubits at the certified H* = 9: 102 naive -> 62 windows -> 35 SAC -> 24 domain wall.
@@ -210,7 +224,7 @@ encoding (PCE; Sciorilli et al., arXiv:2401.09421).
   X-mixer and XY-mixer (one-hot subspace), with adjoint gradients.
   - **Qiskit 2.6** is used *only* to cross-check them against gate-level circuits
     (`erpq/solvers/qiskit_check.py`).
-  - Pauli correlation encoding (`erpq/solvers/pce.py`): exact 4-qubit state-vector simulation,
+  - Pauli correlation encoding (`erpq/solvers/pce.py`): exact 2- and 4-qubit state-vector simulation,
     parameter-shift gradients, also cross-checked with Qiskit (Part 7).
 - **QUBO model:** own `QUBO` class (`erpq/qubo.py`), converted to `dimod.BinaryQuadraticModel` for
   the samplers. **PyQUBO is not used.**
@@ -302,8 +316,8 @@ pip install veloxq-sdk                                   # optional, only for --
 | `python run_extension.py all --quick --out <dir>` | writes elsewhere; use it for experiments so the committed results stay intact | |
 | `python run_extension.py investment --cost-unit-pln 150 --days-per-year 250 --machine-cost-pln 450000` | economic assumptions of Part 5 (defaults shown) | |
 | `python demo.py` | live demo (prints only, writes no files) | ~50 s |
-| `python run_extension.py pce` | Part 7, instance B on 4 qubits (not part of `all`): the certified 24-variable QUBO with Pauli correlation encoding, 100 restarts, plus the classical control and SA. `--quick`: 30 restarts | ~1.5 min |
-| `python -m pytest -q` | the whole test suite (49 tests) | ~30 s |
+| `python run_extension.py pce` | Part 7, both baseline instances on the fewest qubits (not part of `all`): the certified domain-wall QUBOs (A: 8 variables on 2 qubits, B: 24 on 4, each enumerated over all 2^m states) with Pauli correlation encoding, 100 restarts each, plus the untrained circuit, the classical control and SA. `--quick`: 30 restarts | ~2 min |
+| `python -m pytest -q` | the whole test suite (52 tests) | ~30 s |
 
 **What `--quick` changes in `run_extension.py`:**
 * Part 2: p <= 3, only the XY-ring and CVaR(p = 2) variants (no clique or parity), 3 restarts,
@@ -386,7 +400,8 @@ erpq/                   the package
   solvers/qaoa.py       XMixerQAOA, XYMixerQAOA (ring | clique | parity), adjoint gradients, INTERP, CVaR, evaluate()
   solvers/qiskit_check.py  gate-level Qiskit circuits + comparison helpers
   solvers/samplers.py   simulated_annealing, tabu_search, exhaustive, veloxq (+ Samples)
-  solvers/pce.py        Pauli correlation encoding (24 variables on 4 qubits), bitswap, pce_solve, relaxation_control
+  solvers/pce.py        Pauli correlation encoding on the fewest qubits (min_qubits; A: 8 variables on 2, B: 24 on 4),
+                        bitswap, pce_solve, untrained_readouts, relaxation_control
 instances/
   instance_2x2.json, instance_3x3.json        challenge instances (unchanged schema)
   extension/L1_due_dates.json, L2_setups.json, L3_outage.json, metaltech_monday.json, metaltech_monday_2F.json
@@ -645,7 +660,7 @@ baselines, 153 for metaltech_monday).
 | Disruption | `disruption_0_plan.png` / `disruption_1_right_shift.png` / `disruption_2_qubo_replan.png` |
 | Monday plan | `gantt_metaltech_monday_qaoa.png` |
 | VeloxQ at scale | `veloxq.png`: whole QUBO vs decomposition (gap to CP-SAT) and the decomposition rounds, VeloxQ vs SA. `VELOXQ.md` has all five uses of VeloxQ in one place; `python demo.py --veloxq` shows a live call |
-| Instance B on 4 qubits | `results/extension/pce.md` (table + ASCII Gantt, no chart) |
+| Instances A and B on 2 / 4 qubits | `results/extension/pce.md` (tables + ASCII Gantt, no chart) |
 
 **Caveats to say out loud:**
 - All QAOA runs are noiseless simulations. VeloxQ ran live, but it is a classical GPU solver, not
@@ -665,7 +680,9 @@ baselines, 153 for metaltech_monday).
 - The decomposition gives good plans, not certificates. Optimality there is judged against CP-SAT.
 - Part 7's 4 qubits hold 24 correlators, not 24 independent bits. PCE is a heuristic (19% per restart),
   the same loss without any quantum state also reaches 19%, and any 4-qubit circuit is classically
-  simulable: it shows the qubit count, not an advantage.
+  simulable: it shows the qubit count, not an advantage. On instance A (8 variables on 2 qubits) PCE
+  finds no optimal schedule at all (0 / 100 restarts), while the same loss without a quantum state
+  reaches 13%.
 
 ---
 

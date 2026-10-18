@@ -17,8 +17,9 @@ Parts (results in results/extension/):
   veloxq       VeloxQ at scale (needs VELOX_TOKEN, not part of "all"): one call
                on the whole QUBO of 4-12-job order books, solver settings, and
                decomposition with 8 sub-QUBOs per VeloxQ call
-  pce          instance B (3x3) on 4 qubits (not part of "all"): the certified
-               24-variable QUBO with Pauli correlation encoding
+  pce          the baseline instances on 2 and 4 qubits (not part of "all"):
+               their certified domain-wall QUBOs (8 and 24 variables) with
+               Pauli correlation encoding on the fewest qubits that hold them
 
     python run_extension.py all            # everything (~30 min on 4 cores)
     python run_extension.py all --quick    # reduced statistics (~10 min)
@@ -981,111 +982,173 @@ def _md_veloxq(out):
     (OUT / "veloxq.md").write_text("\n".join(L), newline="\n")
 
 
+PCE_INSTANCES = [("A (2x2)", "instance_2x2"), ("B (3x3)", "instance_3x3")]
+PCE_UNTRAINED = 100_000           # random angle vectors for the untrained-circuit row
+
+
 def part_pce(args) -> dict:
-    print("\n### Part 7 - instance B (3x3) on 4 qubits: Pauli correlation encoding of the 24-variable QUBO")
+    print("\n### Part 7 - the baseline instances on 2 and 4 qubits: Pauli correlation encoding of their certified QUBOs")
+    restarts = 30 if args.quick else 100
+    out = {"instances": [_pce_instance(label, name, restarts, args.shots) for label, name in PCE_INSTANCES]}
+    save("pce", out)
+    _md_pce(out)
+    return out
+
+
+def _pce_instance(label: str, name: str, restarts: int, shots: int) -> dict:
+    """One baseline instance: the certified SAC + domain-wall QUBO at the FIFO horizon, on the fewest qubits."""
     from erpq.pipeline import report_samples
-    from erpq.solvers.pce import pce_solve, qiskit_label, relaxation_control
+    from erpq.solvers.pce import pauli_strings, pce_solve, qiskit_label, relaxation_control, untrained_readouts
     from erpq.solvers.qiskit_check import compare_pce
 
-    inst = Instance.load(ROOT / "instances/instance_3x3.json")
+    inst = Instance.load(ROOT / f"instances/{name}.json")
     ref = solve_cpsat(inst).objective
     H = fifo_schedule(inst).makespan
-    form = build_time_indexed_qubo(inst, H, "sac")
-    dw = to_domain_wall(form)
-    T = form.register_energy_tensor()
-    n_opt = int(np.isclose(T, T.min()).sum())
-    restarts = 30 if args.quick else 100
-    raw, swapped, pce = pce_solve(dw.qubo, restarts=restarts, seed=7)
+    dw = to_domain_wall(build_time_indexed_qubo(inst, H, "sac"))
+    ex = samplers.exhaustive(dw.qubo)
+    ground = [dw.decode(x)[0] for x in ex.states]
+    n_opt = sum(s is not None and not s.violations() and s.objective() == ref for s in ground)
+    cert = {"method": f"all 2^{dw.qubo.n} states", "ground_energy": ex.best_energy, "ground_states": len(ground),
+            "all_ground_states_optimal": n_opt == len(ground)}
+    raw, swapped, pce = pce_solve(dw.qubo, restarts=restarts, seed=7)          # fewest qubits, alpha = n
     rows = {}
     for key, smp in (("pce_raw", raw), ("pce_bitswap", swapped),
+                     ("untrained", untrained_readouts(pce, PCE_UNTRAINED, seed=7)),
                      ("relaxation_control", relaxation_control(dw.qubo, restarts=restarts, seed=7)),
                      ("sa", samplers.simulated_annealing(dw.qubo, num_reads=restarts, num_sweeps=1000, seed=7))):
         rep = report_samples(dw, smp, ref)
         rows[key] = {"p_optimal": rep.optimal_fraction, "p_feasible": rep.feasible_fraction,
                      "best": rep.best_objective, "reads": len(smp.states)}
     p = rows["pce_raw"]["p_optimal"]
-    ok = [k for k, x in enumerate(raw.states) if (s := dw.decode(x)[0]) is not None and not s.violations()
-          and s.objective() == ref]
-    best = None
-    if ok:
-        k = max(ok, key=lambda i: raw.info["min_abs_correlator"][i])
-        theta = raw.info["thetas"][k]
-        shots = pce.shot_readout(theta, args.shots, np.random.default_rng(7))
-        x_shots = pce.bits(shots)
-        s_shots = dw.decode(x_shots)[0]
-        sched = dw.decode(raw.states[k])[0]
-        best = {"restart": k, "loss": raw.info["losses"][k], "min_abs_correlator": raw.info["min_abs_correlator"][k],
-                "qiskit_max_abs_diff": compare_pce(pce, theta), "shots_per_setting": args.shots,
-                "shot_readout_equal": bool(np.array_equal(x_shots, raw.states[k])),
-                "shot_readout_makespan": None if s_shots is None or s_shots.violations() else s_shots.makespan,
-                "theta": theta, "schedule": sched.to_json_dict("instance_3x3"), "ascii_gantt": sched.ascii_gantt()}
-    out = {"instance": "instance_3x3", "horizon": H, "optimum": ref, "formulation": "SAC + domain wall",
-           "variables": dw.qubo.n, "couplings": dw.qubo.num_interactions, "qubits": pce.n,
-           "measurement_settings": 3, "strings": [qiskit_label(pce.n, s) for s in pce.strings],
-           "optimal_bitstrings": n_opt, "uniform_p_optimal": n_opt / 2**dw.qubo.n,
-           "settings": {k: v for k, v in raw.info.items() if k not in ("losses", "min_abs_correlator", "thetas")},
-           "wall_time_s": raw.wall_time, "rows": rows,
-           "restarts_for_99pct": None if p <= 0 else (1 if p >= 1 else int(np.ceil(np.log(0.01) / np.log(1 - p)))),
-           "best_restart": best}
-    print(f"  {dw.qubo.n}-variable QUBO ({dw.qubo.num_interactions} couplings) on {pce.n} qubits, {restarts} restarts "
-          f"({raw.wall_time:.0f}s): P(optimal) raw {p:.3f}, after one bit-swap pass "
-          f"{rows['pce_bitswap']['p_optimal']:.3f}; same loss without a quantum state "
-          f"{rows['relaxation_control']['p_optimal']:.3f}; SA on the 24 qubits {rows['sa']['p_optimal']:.3f}")
-    if best:
-        print(f"  best restart {best['restart']}: makespan {best['schedule']['makespan']}, Qiskit max diff "
-              f"{best['qiskit_max_abs_diff']:.1e}, {args.shots} shots x 3 settings reproduce the read-out: "
-              f"{best['shot_readout_equal']}")
+    # the read-out shown: lowest QUBO energy over all restarts, ties broken by the largest correlator margin
+    lowest = np.flatnonzero(np.isclose(raw.energies, raw.energies.min()))
+    kb = int(max(lowest, key=lambda i: raw.info["min_abs_correlator"][i]))
+    theta = raw.info["thetas"][kb]
+    x_shots = pce.bits(pce.shot_readout(theta, shots, np.random.default_rng(7)))
+    s_shots = dw.decode(x_shots)[0]
+    sched = dw.decode(raw.states[kb])[0]
+    valid = sched is not None and not sched.violations()
+    best = {"restart": kb, "energy": float(raw.energies[kb]), "optimal": bool(valid and sched.objective() == ref),
+            "loss": raw.info["losses"][kb], "min_abs_correlator": raw.info["min_abs_correlator"][kb],
+            "qiskit_max_abs_diff": compare_pce(pce, theta), "shots_per_setting": shots,
+            "shot_readout_equal": bool(np.array_equal(x_shots, raw.states[kb])),
+            "shot_readout_makespan": None if s_shots is None or s_shots.violations() else s_shots.makespan,
+            "theta": theta, "schedule": sched.to_json_dict(name) if valid else None,
+            "ascii_gantt": sched.ascii_gantt() if valid else None}
+    print(f"  instance {label}: {dw.qubo.n}-variable QUBO ({dw.qubo.num_interactions} couplings) on {pce.n} qubits, "
+          f"ground states certified optimal: {cert['all_ground_states_optimal']} ({cert['method']}); {restarts} "
+          f"restarts ({raw.wall_time:.0f}s): P(optimal) raw {p:.3f}, after one bit-swap pass "
+          f"{rows['pce_bitswap']['p_optimal']:.3f}; untrained circuit {rows['untrained']['p_optimal']:.2e}; same loss "
+          f"without a quantum state {rows['relaxation_control']['p_optimal']:.3f}; SA on the {dw.qubo.n} qubits "
+          f"{rows['sa']['p_optimal']:.3f}")
+    print(f"  read-out shown: restart {kb}, QUBO energy {best['energy']:g} (optimal: {best['optimal']}), Qiskit max diff "
+          f"{best['qiskit_max_abs_diff']:.1e}, {shots} shots x 3 settings reproduce the read-out: "
+          f"{best['shot_readout_equal']}")
+    if valid:
         print(best["ascii_gantt"])
-    save("pce", out)
-    _md_pce(out)
-    return out
+    return {"label": label, "instance": name, "horizon": H, "optimum": ref, "formulation": "SAC + domain wall",
+            "variables": dw.qubo.n, "couplings": dw.qubo.num_interactions, "qubits": pce.n,
+            "strings_available": len(pauli_strings(pce.n)), "measurement_settings": 3,
+            "strings": [qiskit_label(pce.n, s) for s in pce.strings], "certificate": cert,
+            "optimal_bitstrings": n_opt, "uniform_p_optimal": n_opt / 2**dw.qubo.n,
+            "settings": {k: v for k, v in raw.info.items() if k not in ("losses", "min_abs_correlator", "thetas")},
+            "wall_time_s": raw.wall_time, "rows": rows,
+            "restarts_for_99pct": None if p <= 0 else (1 if p >= 1 else int(np.ceil(np.log(0.01) / np.log(1 - p)))),
+            "best_restart": best}
+
+
+def _frac(x: float) -> str:
+    return f"{x:.1e}" if 0 < x < 0.01 else f"{x:.3f}"
 
 
 def _md_pce(out):
-    r = out["rows"]
-    s = out["settings"]
-    L = ["# Part 7 - instance B (3x3) on 4 qubits: Pauli correlation encoding", "",
-         f"The certified {out['variables']}-variable QUBO of instance B (H = {out['horizon']}, {out['formulation']}, "
-         f"{out['couplings']} couplings, the model behind `schedule_3x3.json`) is solved on **{out['qubits']} qubits** "
-         "with Pauli correlation encoding (PCE; Sciorilli et al., arXiv:2401.09421). Variable i is the sign of the "
-         "expectation value of one Pauli string on a single 4-qubit state, x_i = (1 - sgn<P_i>) / 2. The strings are "
-         "the weight-2 and weight-1 strings of the Z..Z, X..X and Y..Y families (3 x (6 + 4) = 30 >= 24), so one "
-         "evaluation needs only 3 measurement settings. The QUBO itself is unchanged: no coefficient comes from "
-         "brute force, and every read-out is decoded and checked by the validator.", "",
-         f"Ansatz: RY, RZ on every qubit, then {s['layers']} x (CNOT ring, RY, RZ), {s['parameters']} angles. Loss: "
-         f"the paper's tanh relaxation of the Ising energy plus its regulariser, alpha = {s['alpha']:g} "
-         f"(= n^floor(k/2)), beta = {s['beta']:g}, nu = {s['nu']:g}; L-BFGS-B with exact parameter-shift gradients, "
-         f"{s['restarts']} independent random restarts (seed {s['seed']}), {out['wall_time_s']:.0f} s in total.", "",
-         "| method | qubits | runs | P(optimal) per run | P(feasible) | best makespan |", "|---|---|---|---|---|---|",
-         f"| PCE, raw read-out | {out['qubits']} | {r['pce_raw']['reads']} restarts | **{r['pce_raw']['p_optimal']:.3f}** | "
-         f"{r['pce_raw']['p_feasible']:.3f} | {_obj(r['pce_raw']['best'])} |",
-         f"| PCE + one bit-swap pass (classical post-processing) | {out['qubits']} | {r['pce_bitswap']['reads']} restarts | "
-         f"{r['pce_bitswap']['p_optimal']:.3f} | {r['pce_bitswap']['p_feasible']:.3f} | {_obj(r['pce_bitswap']['best'])} |",
-         f"| control: same loss, {out['variables']} free parameters, no quantum state | - | "
-         f"{r['relaxation_control']['reads']} restarts | {r['relaxation_control']['p_optimal']:.3f} | "
-         f"{r['relaxation_control']['p_feasible']:.3f} | {_obj(r['relaxation_control']['best'])} |",
-         f"| simulated annealing on the same QUBO | {out['variables']} | {r['sa']['reads']} reads | "
-         f"{r['sa']['p_optimal']:.3f} | {r['sa']['p_feasible']:.3f} | {_obj(r['sa']['best'])} |", "",
-         f"A uniformly random {out['variables']}-bit string is optimal with probability {out['uniform_p_optimal']:.1e} "
-         f"({out['optimal_bitstrings']} optimal schedules). Restarts needed for 99 % success at the raw rate: "
-         f"{_obj(out['restarts_for_99pct'])}."]
-    b = out["best_restart"]
-    if b:
-        m, n = b["min_abs_correlator"], b["shots_per_setting"]
-        z = m / np.sqrt((1 - m * m) / n)
-        L += ["", f"Read-out used for the schedule: restart {b['restart']}, the optimal read-out (QUBO energy 0: "
-                  f"feasible at the lower bound) with the largest margin, min |<P_i>| = {m:.3f}. Qiskit gate-level "
-                  f"circuit with the same angles: max |<P_i>_numpy - <P_i>_qiskit| = {b['qiskit_max_abs_diff']:.1e}. "
-                  f"Estimating the 24 correlators from {n} shots in each of the 3 settings gives the same bit string: "
-                  f"{b['shot_readout_equal']} (makespan {_obj(b['shot_readout_makespan'])}). The smallest margin is "
-                  f"only {z:.1f} shot-noise standard deviations at {n} shots, so a hardware run would need more "
-                  "shots for a reliable read-out.", "",
-              "```", b["ascii_gantt"], "```"]
-    L += ["", "Caveats: PCE is a variational heuristic without a guarantee (the ground state is not certified by the "
-              "4-qubit run; certification stays with the 24-variable QUBO, see the baseline report). The 4 qubits "
-              "hold correlators, not 24 independent bits, and their simulation is classical. The control row shows "
-              "what the same relaxation achieves without any quantum state.", ""]
+    insts = out["instances"]
+    s0 = insts[0]["settings"]
+    L = ["# Part 7 - the baseline instances on 2 and 4 qubits: Pauli correlation encoding", "",
+         "The time-indexed QUBOs of both baseline instances (SAC-pruned at the baseline horizon, as behind "
+         "`schedule_2x2.json` and `schedule_3x3.json`, then domain-wall encoded) are solved with Pauli correlation "
+         "encoding (PCE; Sciorilli et al., arXiv:2401.09421) on the fewest qubits the encoding allows. Variable i is "
+         "the sign of the expectation value of one Pauli string on a single n-qubit state, x_i = (1 - sgn<P_i>) / 2. "
+         "The strings are the weight-2 and weight-1 strings of the Z..Z, X..X and Y..Y families, 3 x (C(n, 2) + n) of "
+         "them, so one evaluation needs only 3 measurement settings. The QUBOs themselves are unchanged: no "
+         "coefficient comes from brute force, and every read-out is decoded and checked by the validator.", "",
+         f"The protocol is the same for both instances. Ansatz: RY, RZ on every qubit, then {s0['layers']} x (CNOT "
+         "ring, RY, RZ). Loss: the paper's tanh relaxation of the Ising energy plus its regulariser, with alpha = n "
+         "(= n^floor(k/2), k = 2), beta = 0.5 and nu = (sum |h| + sum |J|) / 2 in place of the paper's MaxCut bound. "
+         f"L-BFGS-B with exact parameter-shift gradients, {s0['restarts']} independent random restarts "
+         f"(seed {s0['seed']}). Each QUBO is certified by enumerating all 2^m states.", "",
+         "| instance | horizon | QUBO variables | couplings | qubits | Pauli strings available | angles | alpha | nu | "
+         "ground states | all ground states optimal | PCE time [s] |",
+         "|---|---|---|---|---|---|---|---|---|---|---|---|"]
+    for o in insts:
+        s, c = o["settings"], o["certificate"]
+        L.append(f"| {o['label']} | {o['horizon']} | {o['variables']} | {o['couplings']} | **{o['qubits']}** | "
+                 f"{o['strings_available']} | {s['parameters']} | {s['alpha']:g} | {s['nu']:g} | {c['ground_states']} | "
+                 f"{c['all_ground_states_optimal']} | {o['wall_time_s']:.0f} |")
+    for o in insts:
+        L += ["", *_md_pce_instance(o)]
+    L += ["", "Caveats: PCE is a variational heuristic without a guarantee: the enumeration certifies the QUBOs, not "
+              "the PCE runs. The qubits hold correlators, not independent bits, and their simulation is classical. "
+              "The untrained and control rows show what the circuit achieves without training and what the same "
+              "relaxation achieves without any quantum state.", ""]
     (OUT / "pce.md").write_text("\n".join(L), newline="\n")
+
+
+def _md_pce_instance(o) -> list[str]:
+    r, n, m = o["rows"], o["qubits"], o["variables"]
+
+    def row(name, key, qubits, unit):
+        x = r[key]
+        bold = "**" if key == "pce_raw" else ""
+        return (f"| {name} | {qubits} | {x['reads']} {unit} | {bold}{_frac(x['p_optimal'])}{bold} | "
+                f"{_frac(x['p_feasible'])} | {_obj(x['best'])} |")
+
+    L = [f"## Instance {o['label']}: {m} variables on {n} qubits", "",
+         "| method | qubits | runs | P(optimal) per run | P(feasible) | best makespan |", "|---|---|---|---|---|---|",
+         row("PCE, raw read-out", "pce_raw", n, "restarts"),
+         row("PCE + one bit-swap pass (classical post-processing)", "pce_bitswap", n, "restarts"),
+         row("the same circuit at random angles (no training)", "untrained", n, "angle vectors"),
+         row(f"control: same loss, {m} free parameters, no quantum state", "relaxation_control", "-", "restarts"),
+         row("simulated annealing on the same QUBO", "sa", m, "reads"), ""]
+    k = o["optimal_bitstrings"]
+    text = (f"A uniformly random {m}-bit string is optimal with probability {o['uniform_p_optimal']:.1e} ({k} optimal "
+            f"schedule{'s' * (k != 1)}).")
+    if o["restarts_for_99pct"] is not None:
+        text += f" Restarts needed for 99 % success at the raw rate: {o['restarts_for_99pct']}."
+    L.append(text)
+    if r["pce_raw"]["p_optimal"] == 0:
+        raw, u = r["pce_raw"], r["untrained"]
+        text = (f"No restart returns an optimal schedule: {100 * raw['p_feasible']:.0f}% of the read-outs are feasible, "
+                f"at best makespan {_obj(raw['best'])}{', the rest infeasible' if raw['p_feasible'] < 1 else ''}. ")
+        text += ("The bit-swap pass does not repair them. " if r["pce_bitswap"]["p_optimal"] == 0 else
+                 f"After the bit-swap pass, {100 * r['pce_bitswap']['p_optimal']:.0f}% are optimal. ")
+        if u["p_optimal"] > 0:
+            text += (f"The optimal sign pattern is reachable on {n} qubits: the untrained circuit produces it for "
+                     f"{100 * u['p_optimal']:.2g}% of the random angle vectors. It is the training on the relaxed loss, "
+                     "not the encoding, that misses it.")
+        else:
+            text += f"The untrained circuit does not produce it either ({u['reads']} random angle vectors)."
+        L += ["", text]
+    b = o["best_restart"]
+    mg, shots = b["min_abs_correlator"], b["shots_per_setting"]
+    z = mg / np.sqrt((1 - mg * mg) / shots)
+    if b["optimal"]:
+        head = (f"Read-out used for the schedule: restart {b['restart']}, the optimal read-out (QUBO energy "
+                f"{b['energy']:g}, the ground energy) with the largest margin")
+    else:
+        what = f"makespan {b['schedule']['makespan']}, not optimal" if b["schedule"] else "infeasible"
+        head = (f"Best read-out: restart {b['restart']}, QUBO energy {b['energy']:g} ({what}), the lowest of all "
+                "restarts, with the largest margin among them")
+    L += ["", f"{head}, min |<P_i>| = {mg:.3f}. Qiskit gate-level circuit with the same angles: max |<P_i>_numpy - "
+              f"<P_i>_qiskit| = {b['qiskit_max_abs_diff']:.1e}. Estimating the {m} correlators from {shots} shots in "
+              f"each of the 3 settings gives the same bit string: {b['shot_readout_equal']} (makespan "
+              f"{_obj(b['shot_readout_makespan'])}). The smallest margin is "
+              + (f"only {z:.1f} shot-noise standard deviations at {shots} shots, so a hardware run would need more "
+                 "shots for a reliable read-out." if z < 3 else
+                 f"{z:.1f} shot-noise standard deviations at {shots} shots.")]
+    if b["ascii_gantt"]:
+        L += ["", "```", b["ascii_gantt"], "```"]
+    return L
 
 
 def main() -> None:

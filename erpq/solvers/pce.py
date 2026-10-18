@@ -3,13 +3,14 @@
 Sciorilli et al., "Towards large-scale quantum optimization solvers with few qubits", arXiv:2401.09421.
 Variable i is the sign of the expectation value of a Pauli string Pi_i on ONE n-qubit state,
 x_i = (1 - sgn<Pi_i>) / 2 (the spin convention of `QUBO.to_ising`). The strings are the weight-2 and
-weight-1 strings of the three commuting families Z..Z, X..X and Y..Y, 3 * (C(n, 2) + n) of them: 4 qubits
-hold up to 30 variables, and one evaluation needs only 3 measurement settings.
+weight-1 strings of the three commuting families Z..Z, X..X and Y..Y, 3 * (C(n, 2) + n) of them: 2 qubits
+hold up to 9 variables, 3 qubits 18, 4 qubits 30 (`min_qubits`), and one evaluation needs only 3
+measurement settings. Instance A's 8-variable domain-wall QUBO fits on 2 qubits, instance B's 24 on 4.
 
 The state comes from a hardware-efficient ansatz (RY, RZ on every qubit, then `layers` x (CNOT ring,
 RY, RZ)), simulated exactly. Training minimises the paper's relaxed loss
     L = c + sum_i h_i t_i + sum_ij J_ij t_i t_j + beta * nu * (mean_i t_i^2)^2,   t_i = tanh(alpha <Pi_i>)
-with exact parameter-shift gradients and L-BFGS-B. alpha = n^floor(k/2) = 4 (k = 2) and beta = 1/2 are
+with exact parameter-shift gradients and L-BFGS-B. alpha = n^floor(k/2) = n (k = 2) and beta = 1/2 are
 the paper's choices; nu = (sum |h| + sum |J|) / 2 stands in for its MaxCut bound. This is a variational
 heuristic: nothing guarantees that a restart ends in a ground state, so every read-out is decoded and
 validated by the caller, and results are reported per restart, raw and after the paper's single
@@ -41,15 +42,27 @@ def pauli_strings(n: int, m: int | None = None) -> list[tuple[str, tuple[int, ..
     return out if m is None else out[:m]
 
 
+def min_qubits(m: int) -> int:
+    """The fewest qubits whose strings hold m variables (8 -> 2, 24 -> 4)."""
+    n = 1
+    while len(pauli_strings(n)) < m:
+        n += 1
+    return n
+
+
 def qiskit_label(n: int, string: tuple[str, tuple[int, ...]]) -> str:
     fam, sub = string
     return "".join(fam if q in sub else "I" for q in reversed(range(n)))
 
 
 class PCE:
-    def __init__(self, qubo: QUBO, n_qubits: int = 4, layers: int = 4, alpha: float = 4.0, beta: float = 0.5):
+    def __init__(self, qubo: QUBO, n_qubits: int | None = None, layers: int = 4, alpha: float | None = None,
+                 beta: float = 0.5):
+        """`n_qubits` defaults to `min_qubits(qubo.n)`, `alpha` to n (= n^floor(k/2), k = 2)."""
+        n_qubits = min_qubits(qubo.n) if n_qubits is None else n_qubits
         self.qubo = qubo
-        self.n, self.layers, self.alpha, self.beta = n_qubits, layers, alpha, beta
+        self.n, self.layers, self.beta = n_qubits, layers, beta
+        self.alpha = float(n_qubits) if alpha is None else alpha
         self.strings = pauli_strings(n_qubits, qubo.n)
         self.num_params = (layers + 1) * n_qubits * 2
         h, J, c = qubo.to_ising()
@@ -70,7 +83,7 @@ class PCE:
                 U = np.kron(U, _BASIS[f])
             self._rot[f] = U.T
         self._chi = {f: np.array([np.prod(self._sign[list(s)], axis=0) for g, s in self.strings if g == f])
-                     for f in FAMILIES}
+                     .reshape(-1, dim) for f in FAMILIES}                    # (0, dim) for an unused family
         self._order = np.argsort([FAMILIES.index(g) for g, _ in self.strings], kind="stable")
         self._inverse = np.argsort(self._order)
 
@@ -139,10 +152,11 @@ def bitswap(q: QUBO, x: np.ndarray) -> np.ndarray:
     return x
 
 
-def pce_solve(q: QUBO, n_qubits: int = 4, layers: int = 4, alpha: float = 4.0, beta: float = 0.5,
+def pce_solve(q: QUBO, n_qubits: int | None = None, layers: int = 4, alpha: float | None = None, beta: float = 0.5,
               restarts: int = 100, seed: int = 7, maxiter: int = 2000) -> tuple[Samples, Samples, PCE]:
     """Independent random restarts; returns the raw read-outs, the bit-swapped read-outs and the model.
 
+    Defaults as in `PCE`: the fewest qubits that hold the variables, alpha = n.
     `info["thetas"]` keeps the trained angles of every restart (row k belongs to read-out k).
     """
     pce = PCE(q, n_qubits, layers, alpha, beta)
@@ -161,7 +175,7 @@ def pce_solve(q: QUBO, n_qubits: int = 4, layers: int = 4, alpha: float = 4.0, b
         thetas.append(res.x)
         evals += int(res.nfev)
     wall = time.perf_counter() - t0
-    info = {"n_qubits": n_qubits, "variables": q.n, "layers": layers, "parameters": pce.num_params, "alpha": alpha,
+    info = {"n_qubits": pce.n, "variables": q.n, "layers": layers, "parameters": pce.num_params, "alpha": pce.alpha,
             "beta": beta, "nu": pce.nu, "restarts": restarts, "seed": seed, "loss_evaluations": evals,
             "losses": losses, "min_abs_correlator": margins, "thetas": np.array(thetas)}
     raw_s = np.array(raw, dtype=np.int8)
@@ -170,9 +184,22 @@ def pce_solve(q: QUBO, n_qubits: int = 4, layers: int = 4, alpha: float = 4.0, b
             Samples("pce+bitswap", sw_s, q.energies(sw_s), wall, {"post_processing": "one bit-swap pass"}), pce)
 
 
-def relaxation_control(q: QUBO, alpha: float = 4.0, beta: float = 0.5, restarts: int = 100, seed: int = 7) -> Samples:
-    """Classical control: the same relaxed loss over m free parameters (t_i = tanh(alpha z_i)), no quantum state."""
-    pce = PCE(q, 4, 0, alpha, beta)
+def untrained_readouts(pce: PCE, samples: int = 100_000, seed: int = 7) -> Samples:
+    """The same circuit at uniformly random angles (the restarts' starting points), read out without training."""
+    t0 = time.perf_counter()
+    theta = np.random.default_rng(seed).uniform(0, 2 * np.pi, (samples, pce.num_params))
+    states = pce.bits(pce.correlators(theta))
+    return Samples("pce, random angles", states, pce.qubo.energies(states), time.perf_counter() - t0, {})
+
+
+def relaxation_control(q: QUBO, alpha: float | None = None, beta: float = 0.5, restarts: int = 100,
+                       seed: int = 7) -> Samples:
+    """Classical control: the same relaxed loss over m free parameters (t_i = tanh(alpha z_i)), no quantum state.
+
+    alpha defaults to the value PCE uses for this QUBO (n = `min_qubits(q.n)`).
+    """
+    pce = PCE(q, None, 0, alpha, beta)
+    alpha = pce.alpha
     rng = np.random.default_rng(seed)
 
     def loss_grad(z):
