@@ -5,7 +5,7 @@ solved with QAOA on state-vector simulators and with QUBO solvers. Stage 2 exten
 factory model: setups, maintenance, due dates, job-specific routes, breakdowns with rolling
 re-planning, and a second milling machine.
 
-**Demo video:** _add the link to the recorded demo here (unlisted YouTube / Drive link)._
+**Demo video:**https://drive.google.com/file/d/1fCFsAm3Cgus9h5_DavIA4tXieoB_E6pN/view?usp=sharing
 
 | document | content |
 |---|---|
